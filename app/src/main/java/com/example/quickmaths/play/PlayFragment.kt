@@ -1,4 +1,4 @@
-package com.example.quickmaths.home
+package com.example.quickmaths.play
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,29 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import com.example.quickmaths.R
-import com.example.quickmaths.databinding.HomeFragmentBinding
+import com.example.quickmaths.databinding.PlayFragmentBinding
 
-class HomeFragment : Fragment() {
+class PlayFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = PlayFragment()
     }
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var binding: HomeFragmentBinding
+    private lateinit var viewModel: PlayViewModel
+    private lateinit var binding: PlayFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.play_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PlayViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

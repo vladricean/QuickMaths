@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.HomeFragmentBinding
+import kotlinx.coroutines.flow.collect
 
 class HomeFragment : Fragment() {
 
@@ -30,17 +32,19 @@ class HomeFragment : Fragment() {
         binding = HomeFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.navigateToPlay.observe(viewLifecycleOwner,
-            Observer<Boolean> { navigate ->
-            if(navigate){
-                val navController = findNavController()
-                navController.navigate(R.id.action_homeFragment_to_playFragment)
-                viewModel.onNavigatedToPlay()
-            }
-        })
+        navigationHandler()
 
         return binding.root
+    }
+
+    private fun navigationHandler(){
+        viewModel.onPlayPressed().observe(viewLifecycleOwner,
+            Observer {
+                val navController = findNavController()
+                navController.navigate(R.id.action_homeFragment_to_playFragment)
+            })
     }
 
 

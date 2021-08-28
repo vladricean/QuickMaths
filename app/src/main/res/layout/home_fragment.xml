@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="152dp"
-            android:onClick="@{() -> viewModel.onPlayClicked()}"
+            android:onClick="@{() -> viewModel.onPlayTappet()}"
             android:text="@string/play_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -29,7 +29,8 @@
 
         </androidx.appcompat.widget.AppCompatButton>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnShowSnackbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="300dp"
@@ -38,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.appcompat.widget.AppCompatTextView>
+        </androidx.appcompat.widget.AppCompatButton>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

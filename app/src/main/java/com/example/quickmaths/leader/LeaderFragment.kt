@@ -1,4 +1,4 @@
-package com.example.quickmaths.settings
+package com.example.quickmaths.leader
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,21 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.quickmaths.R
 
-class SettingsFragment : Fragment() {
+class LeaderFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SettingsFragment()
+        fun newInstance() = LeaderFragment()
     }
 
-    private lateinit var viewModel: SettingsViewModel
+    private lateinit var viewModel: LeaderViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_fragment, container, false)
+        return inflater.inflate(R.layout.leader_fragment, container, false)
     }
-
-
 
 }

@@ -45,6 +45,18 @@ class HomeFragment : Fragment() {
                 val navController = findNavController()
                 navController.navigate(R.id.action_homeFragment_to_playFragment)
             })
+
+        viewModel.onLeaderPressed().observe(viewLifecycleOwner,
+        Observer {
+            val navController = findNavController()
+            navController.navigate(R.id.action_homeFragment_to_leaderFragment)
+        })
+
+        viewModel.onSettingsPressed().observe(viewLifecycleOwner,
+        Observer {
+            val navController = findNavController()
+            navController.navigate(R.id.action_homeFragment_to_settingsFragment)
+        })
     }
 
 

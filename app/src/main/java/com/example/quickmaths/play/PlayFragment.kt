@@ -25,10 +25,6 @@ class PlayFragment : Fragment() {
         return inflater.inflate(R.layout.play_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PlayViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

@@ -13,10 +13,26 @@
         <action
             android:id="@+id/action_homeFragment_to_playFragment"
             app:destination="@id/playFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_leaderFragment"
+            app:destination="@id/leaderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/playFragment"
         android:name="com.example.quickmaths.play.PlayFragment"
         android:label="play_fragment"
         tools:layout="@layout/play_fragment" />
+    <fragment
+        android:id="@+id/leaderFragment"
+        android:name="com.example.quickmaths.leader.LeaderFragment"
+        android:label="leader_fragment"
+        tools:layout="@layout/leader_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.quickmaths.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

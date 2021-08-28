@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/activity_main.xml" value="0.36096014492753625" />
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/home_fragment.xml" value="0.36096014492753625" />
+        <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/leader_fragment.xml" value="0.17831813576494426" />
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/play_fragment.xml" value="0.35733695652173914" />
-        <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/settings_fragment.xml" value="0.35144927536231885" />
+        <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/settings_fragment.xml" value="0.25" />
+        <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/menu/navdrawer_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">QuickMaths</string>
     <string name="play_button">Play</string>
+    <string name="leaderboard_button">Leaderboard</string>
+    <string name="settings_button">Settings</string>
+    <string name="quit_button">Quit</string>
 </resources>

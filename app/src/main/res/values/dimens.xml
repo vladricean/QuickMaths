@@ -6,4 +6,11 @@
     <dimen name="button_top_margin">16dp</dimen>
     <dimen name="button_end_margin">16dp</dimen>
     <dimen name="horizontal_margin">8dp</dimen>
+    <dimen name="constraint_top">16dp</dimen>
+    <dimen name="constraint_start">16dp</dimen>
+    <dimen name="constraint_end">16dp</dimen>
+    <dimen name="tv_play_dim">30sp</dimen>
+    <dimen name="number_size">24sp</dimen>
+    <dimen name="number_width">90dp</dimen>
+    <dimen name="number_height">60dp</dimen>
 </resources>

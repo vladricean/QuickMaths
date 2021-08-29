@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.PlayFragmentBinding
 
@@ -22,9 +24,22 @@ class PlayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.play_fragment, container, false)
+
+        binding = PlayFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(PlayViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        settingUpLiveDataObservation()
+
+        return binding.root
     }
 
-
+    private fun settingUpLiveDataObservation(){
+        viewModel.userAnswer.observe(viewLifecycleOwner,
+        Observer {
+            viewModel.checkUserAnswer()
+        })
+    }
 
 }

@@ -5,6 +5,7 @@
     tools:context=".play.PlayFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.quickmaths.play.PlayViewModel" />
@@ -14,22 +15,144 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="50dp">
+
+        </androidx.constraintlayout.widget.Guideline>
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="220dp"
-            android:text="Play Fragment"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.583"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@string/play_title"
+            android:textSize="@dimen/tv_play_dim"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_play_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@{viewModel.question}"
+            android:textSize="@dimen/tv_play_dim"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            tools:text="1 + 2">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_play_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:inputType="number"
+            android:text="@={viewModel.userAnswer}"
+            android:textSize="@dimen/tv_play_dim"
+            app:layout_constraintEnd_toEndOf="@+id/tv_play_question"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="@+id/tv_play_question"
+            app:layout_constraintTop_toBottomOf="@+id/tv_play_question"
+            tools:text="3">
+
+        </androidx.appcompat.widget.AppCompatEditText>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineNumbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="260dp">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_one"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_one"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_two"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_two"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/btn_three"
+            app:layout_constraintStart_toEndOf="@+id/btn_one"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_three"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@string/number_three"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@{viewModel.score.toString()}"
+            android:textAlignment="center"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+            tools:text="Score">
 
         </androidx.appcompat.widget.AppCompatTextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </layout>

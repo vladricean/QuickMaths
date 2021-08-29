@@ -4,4 +4,14 @@
     <string name="leaderboard_button">Leaderboard</string>
     <string name="settings_button">Settings</string>
     <string name="quit_button">Quit</string>
+    <string name="home_title">Home</string>
+    <string name="play_title">Play</string>
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="settings_title">Settings</string>
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="tv_play_default_text">1 + 2</string>
+    <string name="et_play_default_text">3</string>
+    <string name="number_zero">0</string>
 </resources>

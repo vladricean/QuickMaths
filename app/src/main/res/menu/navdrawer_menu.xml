@@ -4,15 +4,15 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="Home" />
+        android:title="@string/home_title" />
     <item
         android:id="@+id/playFragment"
-        android:title="Play" />
+        android:title="@string/play_title" />
     <item
         android:id="@+id/leaderFragment"
-        android:title="Leaderboard" />
+        android:title="@string/leaderboard_title" />
     <item
         android:id="@+id/settingsFragment"
-        android:title="Settings" />
+        android:title="@string/settings_title" />
 
 </menu>

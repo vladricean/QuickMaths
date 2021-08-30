@@ -54,13 +54,13 @@
 
         </androidx.appcompat.widget.AppCompatTextView>
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/et_play_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/constraint_top"
             android:inputType="number"
-            android:text="@={viewModel.userAnswer}"
+            android:text="@{viewModel.userAnswer.toString()}"
             android:textSize="@dimen/tv_play_dim"
             app:layout_constraintEnd_toEndOf="@+id/tv_play_question"
             app:layout_constraintHorizontal_bias="0.476"
@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_play_question"
             tools:text="3">
 
-        </androidx.appcompat.widget.AppCompatEditText>
+        </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineNumbers"
@@ -97,45 +97,6 @@
 
         </androidx.constraintlayout.widget.Guideline>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_one"
-            android:layout_width="@dimen/number_width"
-            android:layout_height="@dimen/number_height"
-            android:layout_marginStart="@dimen/constraint_start"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:text="@string/number_one"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
-            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
-
-        </androidx.appcompat.widget.AppCompatButton>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_two"
-            android:layout_width="@dimen/number_width"
-            android:layout_height="@dimen/number_height"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:text="@string/number_two"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toStartOf="@+id/btn_three"
-            app:layout_constraintStart_toEndOf="@+id/btn_one"
-            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
-
-        </androidx.appcompat.widget.AppCompatButton>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_three"
-            android:layout_width="@dimen/number_width"
-            android:layout_height="@dimen/number_height"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:layout_marginEnd="@dimen/constraint_end"
-            android:text="@string/number_three"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
-            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
-
-        </androidx.appcompat.widget.AppCompatButton>
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
@@ -150,6 +111,158 @@
             tools:text="Score">
 
         </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_one"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_one"
+            android:textSize="@dimen/number_size"
+            android:onClick="@{() -> viewModel.onClickOne()}"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_four">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_two"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_two"
+            android:textSize="@dimen/number_size"
+            android:onClick="@{() -> viewModel.onClickTwo()}"
+            app:layout_constraintEnd_toStartOf="@+id/btn_three"
+            app:layout_constraintStart_toEndOf="@+id/btn_one"
+            app:layout_constraintTop_toBottomOf="@+id/btn_five">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_three"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@string/number_three"
+            android:textSize="@dimen/number_size"
+            android:onClick="@{() -> viewModel.onClickThree()}"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@+id/btn_six">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_four"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_four"
+            android:onClick="@{() -> viewModel.onClickFour()}"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_seven">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_five"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickFive()}"
+            android:text="@string/number_five"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/btn_six"
+            app:layout_constraintStart_toEndOf="@+id/btn_four"
+            app:layout_constraintTop_toBottomOf="@+id/btn_eight">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_six"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickSix()}"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@string/number_six"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@+id/btn_nine">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_seven"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:onClick="@{() -> viewModel.onClickSeven()}"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_seven"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_eight"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:onClick="@{() -> viewModel.onClickEight()}"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@string/number_eight"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/btn_nine"
+            app:layout_constraintStart_toEndOf="@+id/btn_seven"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_nine"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickNine()}"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="@string/number_nine"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@+id/guidelineNumbers">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_zero"
+            android:layout_height="@dimen/number_height"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickZero()}"
+            android:text="@string/number_zero"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toEndOf="@+id/btn_two"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/btn_one">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton2"
+            android:layout_width="@dimen/number_width"
+            android:layout_height="@dimen/number_height"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:onClick="@{() -> viewModel.onClickClear()}"
+            android:text="@string/delete_button"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toBottomOf="@+id/btn_three" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

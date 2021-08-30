@@ -13,4 +13,5 @@
     <dimen name="number_size">24sp</dimen>
     <dimen name="number_width">90dp</dimen>
     <dimen name="number_height">60dp</dimen>
+    <dimen name="backspace_text_size">10sp</dimen>
 </resources>

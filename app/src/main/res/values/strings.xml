@@ -8,10 +8,20 @@
     <string name="play_title">Play</string>
     <string name="leaderboard_title">Leaderboard</string>
     <string name="settings_title">Settings</string>
-    <string name="number_one">1</string>
-    <string name="number_two">2</string>
-    <string name="number_three">3</string>
+
     <string name="tv_play_default_text">1 + 2</string>
     <string name="et_play_default_text">3</string>
     <string name="number_zero">0</string>
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="number_six">6</string>
+    <string name="number_seven">7</string>
+    <string name="number_eight">8</string>
+    <string name="number_nine">9</string>
+    <string name="backspace_button">Backspace</string>
+    <string name="delete_button">Del</string>
+
 </resources>

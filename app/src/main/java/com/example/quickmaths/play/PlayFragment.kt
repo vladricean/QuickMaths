@@ -36,10 +36,10 @@ class PlayFragment : Fragment() {
     }
 
     private fun settingUpLiveDataObservation(){
-        viewModel.userAnswer.observe(viewLifecycleOwner,
-        Observer {
-            viewModel.checkUserAnswer()
-        })
+//        viewModel.userAnswer.observe(viewLifecycleOwner,
+//        Observer {
+//            viewModel.checkUserAnswer()
+//        })
     }
 
 }

@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id "org.jetbrains.kotlin.kapt"
+    id 'androidx.navigation.safeargs'
 }
+
 
 android {
     compileSdk 30
@@ -36,7 +38,7 @@ android {
 }
 
 ext {
-    navigationVersion = "2.3.0"
+    navigationVersion = "2.3.5"
 }
 
 dependencies {

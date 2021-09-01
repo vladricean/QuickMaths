@@ -79,6 +79,18 @@
 
         </androidx.appcompat.widget.AppCompatButton>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_tv"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

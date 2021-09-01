@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModel
 import com.example.quickmaths.R
+import com.example.quickmaths.databinding.LostFragmentBinding
 
 class LostFragment : Fragment() {
 
@@ -15,18 +18,24 @@ class LostFragment : Fragment() {
     }
 
     private lateinit var viewModel: LostViewModel
+    private lateinit var binding: LostFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
-        return inflater.inflate(R.layout.lost_fragment, container, false)
+        binding = LostFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(LostViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        val args = LostFragmentArgs.fromBundle(requireArguments())
+        binding.tvScore.setText(args.numPoints.toString())
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LostViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

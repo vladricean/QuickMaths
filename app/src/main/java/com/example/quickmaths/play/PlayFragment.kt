@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.PlayFragmentBinding
 
@@ -36,10 +37,12 @@ class PlayFragment : Fragment() {
     }
 
     private fun settingUpLiveDataObservation(){
-//        viewModel.userAnswer.observe(viewLifecycleOwner,
-//        Observer {
-//            viewModel.checkUserAnswer()
-//        })
+        viewModel.onNavigateToLostEvent().observe(viewLifecycleOwner,
+        Observer {
+            val navController = findNavController()
+            navController.navigate(PlayFragmentDirections.actionPlayFragmentToLostFragment(5))
+        })
+
     }
 
 }

@@ -26,13 +26,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
+            style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
             android:text="@string/play_title"
-            android:textSize="@dimen/tv_play_dim"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
             app:layout_constraintTop_toTopOf="@+id/guidelineTop">
@@ -102,13 +102,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/constraint_top"
-            android:layout_marginEnd="@dimen/constraint_end"
             android:text="@{viewModel.score.toString()}"
             android:textAlignment="center"
             android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
-            app:layout_constraintTop_toTopOf="@+id/guidelineTop"
-            tools:text="Score">
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView6"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+            tools:text="7">
 
         </androidx.appcompat.widget.AppCompatTextView>
 
@@ -118,9 +118,9 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickOne()}"
             android:text="@string/number_one"
             android:textSize="@dimen/number_size"
-            android:onClick="@{() -> viewModel.onClickOne()}"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/btn_four">
 
@@ -131,9 +131,9 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickTwo()}"
             android:text="@string/number_two"
             android:textSize="@dimen/number_size"
-            android:onClick="@{() -> viewModel.onClickTwo()}"
             app:layout_constraintEnd_toStartOf="@+id/btn_three"
             app:layout_constraintStart_toEndOf="@+id/btn_one"
             app:layout_constraintTop_toBottomOf="@+id/btn_five">
@@ -146,9 +146,9 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
+            android:onClick="@{() -> viewModel.onClickThree()}"
             android:text="@string/number_three"
             android:textSize="@dimen/number_size"
-            android:onClick="@{() -> viewModel.onClickThree()}"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintTop_toBottomOf="@+id/btn_six">
 
@@ -160,8 +160,8 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
-            android:text="@string/number_four"
             android:onClick="@{() -> viewModel.onClickFour()}"
+            android:text="@string/number_four"
             android:textSize="@dimen/number_size"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
             app:layout_constraintTop_toBottomOf="@+id/btn_seven">
@@ -187,8 +187,8 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickSix()}"
             android:layout_marginEnd="@dimen/constraint_end"
+            android:onClick="@{() -> viewModel.onClickSix()}"
             android:text="@string/number_six"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -200,9 +200,9 @@
             android:id="@+id/btn_seven"
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
-            android:onClick="@{() -> viewModel.onClickSeven()}"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickSeven()}"
             android:text="@string/number_seven"
             android:textSize="@dimen/number_size"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -214,8 +214,8 @@
             android:id="@+id/btn_eight"
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
-            android:onClick="@{() -> viewModel.onClickEight()}"
             android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onClickEight()}"
             android:text="@string/number_eight"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/btn_nine"
@@ -229,8 +229,8 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickNine()}"
             android:layout_marginEnd="@dimen/constraint_end"
+            android:onClick="@{() -> viewModel.onClickNine()}"
             android:text="@string/number_nine"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -240,8 +240,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_zero"
-            android:layout_height="@dimen/number_height"
             android:layout_width="wrap_content"
+            android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
             android:onClick="@{() -> viewModel.onClickZero()}"
@@ -263,6 +263,45 @@
             android:text="@string/delete_button"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintTop_toBottomOf="@+id/btn_three" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="@{viewModel.currentTimeString}"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+            tools:text="20">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/constraint_start"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:text="Timer"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/constraint_top"
+            android:layout_marginEnd="@dimen/constraint_end"
+            android:text="Score"
+            android:textSize="@dimen/number_size"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
+
+        </androidx.appcompat.widget.AppCompatTextView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

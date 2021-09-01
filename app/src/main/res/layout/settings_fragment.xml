@@ -19,7 +19,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="240dp"
             android:text="Settings Fragment"
-            android:textSize="30sp"
+            style="@style/TitleText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.565"
             app:layout_constraintStart_toStartOf="parent"

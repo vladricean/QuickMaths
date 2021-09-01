@@ -75,8 +75,8 @@ class PlayViewModel : ViewModel() {
 
     fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
-        firstNumber = Random.nextInt(1, 30)
-        secondNumber = Random.nextInt(1, 30)
+        firstNumber = Random.nextInt(1, 10)
+        secondNumber = Random.nextInt(1, 10)
         _question.value = "${firstNumber} + ${secondNumber}"
         userAnswer.value = 0
         answer = firstNumber + secondNumber

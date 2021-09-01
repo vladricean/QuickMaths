@@ -27,7 +27,10 @@
         tools:layout="@layout/play_fragment" >
         <action
             android:id="@+id/action_playFragment_to_lostFragment"
-            app:destination="@id/lostFragment" >
+            app:destination="@id/lostFragment"
+            app:popUpTo="@id/playFragment"
+            app:popUpToInclusive="true">
+
         </action>
     </fragment>
     <fragment
@@ -47,10 +50,12 @@
         tools:layout="@layout/lost_fragment" >
         <action
             android:id="@+id/action_lostFragment_to_leaderFragment"
-            app:destination="@id/leaderFragment" />
+            app:destination="@id/leaderFragment"
+            app:popUpTo="@id/homeFragment" />
         <action
             android:id="@+id/action_lostFragment_to_playFragment"
-            app:destination="@id/playFragment" />
+            app:destination="@id/playFragment"
+            app:popUpTo="@id/homeFragment" />
         <argument
             android:name="numPoints"
             app:argType="integer" />

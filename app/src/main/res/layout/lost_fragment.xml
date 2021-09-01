@@ -64,10 +64,11 @@
         </androidx.constraintlayout.widget.Guideline>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton3"
+            android:id="@+id/btnTryAgain"
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/constraint_top"
+            android:onClick="@{() -> viewModel.onPlayAgainPressed()}"
             android:text="@string/try_again"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -83,10 +84,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_big"
             android:text="@string/new_best_score"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatButton3"
+            app:layout_constraintEnd_toEndOf="@+id/btnTryAgain"
             app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="@+id/appCompatButton3"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton3">
+            app:layout_constraintStart_toStartOf="@+id/btnTryAgain"
+            app:layout_constraintTop_toBottomOf="@+id/btnTryAgain">
 
         </androidx.appcompat.widget.AppCompatTextView>
 
@@ -95,6 +96,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:text="@string/view_leaderboard"
+            android:onClick="@{() -> viewModel.onViewLeaderboardPressed()}"
             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView4"
             app:layout_constraintHorizontal_bias="0.518"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"

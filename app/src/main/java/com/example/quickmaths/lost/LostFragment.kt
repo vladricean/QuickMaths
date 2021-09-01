@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.LostFragmentBinding
 
@@ -30,12 +32,29 @@ class LostFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val args = LostFragmentArgs.fromBundle(requireArguments())
-        binding.tvScore.setText(args.numPoints.toString())
+        setScore()
+        settingUpLiveDataObservation()
 
         return binding.root
     }
 
+    private fun settingUpLiveDataObservation() {
+        viewModel.onNavigateToPlayFragment().observe(viewLifecycleOwner,
+        Observer {
+            val navController = findNavController()
+            navController.navigate(LostFragmentDirections.actionLostFragmentToPlayFragment())
+        })
+        viewModel.onNavigateToLeaderFragment().observe(viewLifecycleOwner,
+        Observer {
+            val navController = findNavController()
+            navController.navigate(LostFragmentDirections.actionLostFragmentToLeaderFragment())
+        })
+    }
+
+    private fun setScore() {
+        val args = LostFragmentArgs.fromBundle(requireArguments())
+        binding.tvScore.setText(args.numPoints.toString())
+    }
 
 
 }

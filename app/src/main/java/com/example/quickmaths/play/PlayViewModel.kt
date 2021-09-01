@@ -31,14 +31,8 @@ class PlayViewModel : ViewModel() {
 
         override fun onFinish() {
             _currentTime.value = DONE
-            onNavigateToLostEvent.call()
+            onLost()
         }
-    }
-
-    private val onNavigateToLostEvent = SingleLiveEvent<Void>()
-
-    fun onNavigateToLostEvent(): LiveData<Void> {
-        return onNavigateToLostEvent
     }
 
     private val _currentTime = MutableLiveData<Long>()
@@ -56,6 +50,10 @@ class PlayViewModel : ViewModel() {
     private val _question = MutableLiveData<String>()
     val question: LiveData<String>
         get() = _question
+
+    private val _getScoreAndNavigateToLost = MutableLiveData<Int>()
+    val getScoreAndNavigateToLost: LiveData<Int>
+        get() = _getScoreAndNavigateToLost
 
     val userAnswer = MutableLiveData<Int>()
 
@@ -84,6 +82,10 @@ class PlayViewModel : ViewModel() {
         answer = firstNumber + secondNumber
         timer.cancel()
         timer.start()
+    }
+    
+    fun onLost() {
+        _getScoreAndNavigateToLost.value = _score.value
     }
 
     fun onClickOne() {

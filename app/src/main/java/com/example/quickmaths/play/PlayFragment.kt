@@ -37,10 +37,10 @@ class PlayFragment : Fragment() {
     }
 
     private fun settingUpLiveDataObservation(){
-        viewModel.onNavigateToLostEvent().observe(viewLifecycleOwner,
-        Observer {
+        viewModel.getScoreAndNavigateToLost.observe(viewLifecycleOwner,
+        Observer {  score ->
             val navController = findNavController()
-            navController.navigate(PlayFragmentDirections.actionPlayFragmentToLostFragment(5))
+            navController.navigate(PlayFragmentDirections.actionPlayFragmentToLostFragment(score))
         })
 
     }

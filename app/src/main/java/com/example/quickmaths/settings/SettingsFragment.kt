@@ -2,11 +2,13 @@ package com.example.quickmaths.settings
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.quickmaths.R
+import com.example.quickmaths.databinding.SettingsFragmentBinding
 
 class SettingsFragment : Fragment() {
 
@@ -15,14 +17,31 @@ class SettingsFragment : Fragment() {
     }
 
     private lateinit var viewModel: SettingsViewModel
+    private lateinit var binding: SettingsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_fragment, container, false)
+        binding = SettingsFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        setHasOptionsMenu(true)
+
+        return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI
+            .onNavDestinationSelected(item,requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
 
 }

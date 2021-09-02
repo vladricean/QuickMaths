@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.quickmaths.home.HomeFragment"
+        android:name="com.example.quickmaths.ui.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/playFragment"
-        android:name="com.example.quickmaths.play.PlayFragment"
+        android:name="com.example.quickmaths.ui.PlayFragment"
         android:label="play_fragment"
         tools:layout="@layout/play_fragment" >
         <action
@@ -35,17 +35,17 @@
     </fragment>
     <fragment
         android:id="@+id/leaderFragment"
-        android:name="com.example.quickmaths.leader.LeaderFragment"
+        android:name="com.example.quickmaths.ui.LeaderFragment"
         android:label="leader_fragment"
         tools:layout="@layout/leader_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.quickmaths.settings.SettingsFragment"
+        android:name="com.example.quickmaths.ui.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/lostFragment"
-        android:name="com.example.quickmaths.lost.LostFragment"
+        android:name="com.example.quickmaths.ui.LostFragment"
         android:label="lost_fragment"
         tools:layout="@layout/lost_fragment" >
         <action

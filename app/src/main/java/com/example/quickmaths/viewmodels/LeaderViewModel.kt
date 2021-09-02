@@ -1,4 +1,4 @@
-package com.example.quickmaths.leader
+package com.example.quickmaths.viewmodels
 
 import androidx.lifecycle.ViewModel
 

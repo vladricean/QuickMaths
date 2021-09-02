@@ -1,4 +1,4 @@
-package com.example.quickmaths.home
+package com.example.quickmaths.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.HomeFragmentBinding
-import kotlinx.coroutines.flow.collect
+import com.example.quickmaths.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
 

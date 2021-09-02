@@ -1,4 +1,4 @@
-package com.example.quickmaths;
+package com.example.quickmaths.util;
 
 import android.util.Log;
 

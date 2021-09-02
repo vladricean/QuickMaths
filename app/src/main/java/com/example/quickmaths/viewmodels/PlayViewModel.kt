@@ -1,15 +1,11 @@
-package com.example.quickmaths.play
+package com.example.quickmaths.viewmodels
 
 import android.os.CountDownTimer
-import android.text.Editable
-import android.text.TextWatcher
 import android.text.format.DateUtils
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.quickmaths.SingleLiveEvent
 import kotlin.random.Random
 
 class PlayViewModel : ViewModel() {

@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="50dp">
+            app:layout_constraintGuide_percent="0.05">
 
         </androidx.constraintlayout.widget.Guideline>
 
@@ -60,10 +60,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/constraint_top"
             android:inputType="number"
+            android:maxLength="7"
             android:text="@{viewModel.userAnswer.toString()}"
             android:textSize="@dimen/tv_play_dim"
             app:layout_constraintEnd_toEndOf="@+id/tv_play_question"
-            app:layout_constraintHorizontal_bias="0.476"
             app:layout_constraintStart_toStartOf="@+id/tv_play_question"
             app:layout_constraintTop_toBottomOf="@+id/tv_play_question"
             tools:text="3">
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="260dp">
+            app:layout_constraintGuide_percent="0.35">
 
         </androidx.constraintlayout.widget.Guideline>
 
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp">
+            app:layout_constraintGuide_percent="0.05">
 
         </androidx.constraintlayout.widget.Guideline>
 
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="20dp">
+            app:layout_constraintGuide_percent="0.95">
 
         </androidx.constraintlayout.widget.Guideline>
 
@@ -118,7 +118,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickOne()}"
+            android:onClick="@{() -> viewModel.onClickNumber(1)}"
             android:text="@string/number_one"
             android:textSize="@dimen/number_size"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -131,7 +131,7 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickTwo()}"
+            android:onClick="@{() -> viewModel.onClickNumber(2)}"
             android:text="@string/number_two"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/btn_three"
@@ -146,7 +146,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
-            android:onClick="@{() -> viewModel.onClickThree()}"
+            android:onClick="@{() -> viewModel.onClickNumber(3)}"
             android:text="@string/number_three"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -160,7 +160,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickFour()}"
+            android:onClick="@{() -> viewModel.onClickNumber(4)}"
             android:text="@string/number_four"
             android:textSize="@dimen/number_size"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -173,7 +173,7 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickFive()}"
+            android:onClick="@{() -> viewModel.onClickNumber(5)}"
             android:text="@string/number_five"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/btn_six"
@@ -188,7 +188,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
-            android:onClick="@{() -> viewModel.onClickSix()}"
+            android:onClick="@{() -> viewModel.onClickNumber(6)}"
             android:text="@string/number_six"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -202,7 +202,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickSeven()}"
+            android:onClick="@{() -> viewModel.onClickNumber(7)}"
             android:text="@string/number_seven"
             android:textSize="@dimen/number_size"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -215,7 +215,7 @@
             android:layout_width="@dimen/number_width"
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickEight()}"
+            android:onClick="@{() -> viewModel.onClickNumber(8)}"
             android:text="@string/number_eight"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/btn_nine"
@@ -230,7 +230,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
-            android:onClick="@{() -> viewModel.onClickNine()}"
+            android:onClick="@{() -> viewModel.onClickNumber(9)}"
             android:text="@string/number_nine"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -244,7 +244,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginStart="@dimen/constraint_start"
             android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickZero()}"
+            android:onClick="@{() -> viewModel.onClickNumber(0)}"
             android:text="@string/number_zero"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toEndOf="@+id/btn_two"
@@ -259,7 +259,7 @@
             android:layout_height="@dimen/number_height"
             android:layout_marginTop="@dimen/constraint_top"
             android:layout_marginEnd="@dimen/constraint_end"
-            android:onClick="@{() -> viewModel.onClickClear()}"
+            android:onClick="@{() -> viewModel.onClickNumber(-1)}"
             android:text="@string/delete_button"
             app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
             app:layout_constraintTop_toBottomOf="@+id/btn_three" />

@@ -63,13 +63,13 @@ class PlayViewModel : ViewModel() {
         timer.start()
     }
 
-    fun checkUserAnswer() {
+    private fun checkUserAnswer() {
         if (userAnswer.value == answer) {
             onCorrect()
         }
     }
 
-    fun onCorrect() {
+    private fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
         firstNumber = Random.nextInt(1, 10)
         secondNumber = Random.nextInt(1, 10)
@@ -80,62 +80,19 @@ class PlayViewModel : ViewModel() {
         timer.start()
     }
     
-    fun onLost() {
+    private fun onLost() {
         _getScoreAndNavigateToLost.value = _score.value
     }
 
-    fun onClickOne() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(1)
+    fun onClickNumber(number: Int) {
+        if(number == -1){ // Del button
+            userAnswer.value = 0
+        } else {
+            if (userAnswer.value!! < 9999999) {
+                userAnswer.value = userAnswer.value?.times(10)?.plus(number)
+            }
+        }
         checkUserAnswer()
-    }
-
-    fun onClickTwo() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(2)
-        checkUserAnswer()
-    }
-
-    fun onClickThree() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(3)
-        checkUserAnswer()
-    }
-
-    fun onClickFour() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(4)
-        checkUserAnswer()
-    }
-
-    fun onClickFive() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(5)
-        checkUserAnswer()
-    }
-
-    fun onClickSix() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(6)
-        checkUserAnswer()
-    }
-
-    fun onClickSeven() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(7)
-        checkUserAnswer()
-    }
-
-    fun onClickEight() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(8)
-        checkUserAnswer()
-    }
-
-    fun onClickNine() {
-        userAnswer.value = userAnswer.value?.times(10)?.plus(9)
-        checkUserAnswer()
-    }
-
-    fun onClickZero() {
-        userAnswer.value = userAnswer.value?.times(10)
-        checkUserAnswer()
-    }
-
-    fun onClickClear() {
-        userAnswer.value = 0
     }
 
 }

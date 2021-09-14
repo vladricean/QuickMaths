@@ -9,14 +9,10 @@ import androidx.room.Update
 @Dao
 interface PlayerDatabaseDao{
     @Insert
-    fun insert(player: Player){
-
-    }
+    fun insert(player: Player)
 
     @Update
-    fun update(player: Player){
-
-    }
+    fun update(player: Player)
 
     @Query("SELECT * from player_name_score_table WHERE playerId = :key")
     fun get(key: Long): Player?

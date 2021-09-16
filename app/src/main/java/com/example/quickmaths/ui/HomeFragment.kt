@@ -31,12 +31,12 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        navigationHandler()
+        setupObservation()
 
         return binding.root
     }
 
-    private fun navigationHandler(){
+    private fun setupObservation(){
         viewModel.onPlayPressed().observe(viewLifecycleOwner,
             Observer {
                 val navController = findNavController()

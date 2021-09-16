@@ -30,5 +30,8 @@
     <string name="view_leaderboard">View leaderboard</string>
     <string name="new_best_score">New Best Score!</string>
     <string name="leader_fragment">Leader Fragment</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="register">Register</string>
+    <string name="enter_name_hint">Abigail Hobbs..</string>
 
 </resources>

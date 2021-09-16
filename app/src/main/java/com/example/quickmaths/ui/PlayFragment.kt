@@ -30,12 +30,12 @@ class PlayFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        settingUpLiveDataObservation()
+        setupObservation()
 
         return binding.root
     }
 
-    private fun settingUpLiveDataObservation(){
+    private fun setupObservation(){
         viewModel.getScoreAndNavigateToLost.observe(viewLifecycleOwner,
         Observer {  score ->
             val navController = findNavController()

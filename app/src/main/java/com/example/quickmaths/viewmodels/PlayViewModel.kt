@@ -1,5 +1,6 @@
 package com.example.quickmaths.viewmodels
 
+import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
@@ -8,12 +9,12 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
 
-class PlayViewModel : ViewModel() {
+class PlayViewModel() : ViewModel() {
 
     companion object {
         private const val DONE = 0L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 3900L
+        private const val COUNTDOWN_TIME = 1900L
     }
 
     private var firstNumber = 0

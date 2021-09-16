@@ -3,9 +3,16 @@ package com.example.quickmaths.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.quickmaths.database.Player
 import com.example.quickmaths.database.PlayerDatabaseDao
 import com.example.quickmaths.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
+
 
 class LostViewModel(
     val database: PlayerDatabaseDao,
@@ -16,6 +23,33 @@ class LostViewModel(
         SingleLiveEvent<Void>()
     private val onNavigateToLeaderFragment =
         SingleLiveEvent<Void>()
+
+    private var player = MutableLiveData<Player?>()
+
+    private val _numberOfPlayers = MutableLiveData<Int>()
+    val numberOfPlayers: LiveData<Int>
+            get() = _numberOfPlayers
+
+    fun onClickAddPlayer(){
+        viewModelScope.launch {
+            val newPlayer = Player()
+            insert(newPlayer)
+            player.value = get(1)
+            _numberOfPlayers.value = getNumberOfPlayers()
+        }
+    }
+
+    private suspend fun getNumberOfPlayers(): Int? {
+        return database.getNumberOfPlayers()
+    }
+
+    private suspend fun insert(player: Player) {
+            database.insert(player)
+        }
+
+    private suspend fun get(playerID: Long) : Player {
+        return database.get(playerID)!!
+    }
 
     fun onNavigateToPlayFragment(): LiveData<Void> {
         return onNavigateToPlayFragment

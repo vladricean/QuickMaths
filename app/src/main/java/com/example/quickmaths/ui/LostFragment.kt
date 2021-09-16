@@ -14,6 +14,7 @@ import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.databinding.LostFragmentBinding
 import com.example.quickmaths.viewmodels.LostViewModel
 import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
+import java.lang.StringBuilder
 
 class LostFragment : Fragment() {
 
@@ -39,12 +40,12 @@ class LostFragment : Fragment() {
         binding.viewModel = viewModel
 
         setScore()
-        settingUpLiveDataObservation()
+        setupObservation()
 
         return binding.root
     }
 
-    private fun settingUpLiveDataObservation() {
+    private fun setupObservation() {
         viewModel.onNavigateToPlayFragment().observe(viewLifecycleOwner,
             Observer {
                 val navController = findNavController()
@@ -55,6 +56,10 @@ class LostFragment : Fragment() {
                 val navController = findNavController()
                 navController.navigate(LostFragmentDirections.actionLostFragmentToLeaderFragment())
             })
+        viewModel.numberOfPlayers.observe(viewLifecycleOwner,
+        Observer { numberOfPlayers ->
+            binding.playerStats.setText(numberOfPlayers.toString())
+        })
     }
 
     private fun setScore() {

@@ -60,15 +60,4 @@
             android:name="numPoints"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/firstTimeFragment"
-        android:name="com.example.quickmaths.ui.FirstTimeFragment"
-        android:label="first_time_fragment"
-        tools:layout="@layout/first_time_fragment" >
-        <action
-            android:id="@+id/action_firstTimeFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/firstTimeFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
 </navigation>

@@ -1,29 +1,30 @@
 package com.example.quickmaths.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface PlayerDatabaseDao{
     @Insert
-    fun insert(player: Player)
+    suspend fun insert(player: Player)
 
     @Update
-    fun update(player: Player)
+    suspend fun update(player: Player)
 
     @Query("SELECT * from player_name_score_table WHERE playerId = :key")
-    fun get(key: Long): Player?
+    suspend fun get(key: Long): Player?
 
     @Query("DELETE FROM player_name_score_table")
-    fun clear()
+    suspend fun clear()
 
-    // First player created
+    // New player created
     @Query("SELECT * FROM player_name_score_table ORDER BY playerId DESC LIMIT 1")
-    fun getPlayer(): Player?
+    suspend fun getPlayer(): Player?
 
+    // no need for suspend because i am using LiveData
     @Query("SELECT * FROM player_name_score_table ORDER BY playerId DESC")
     fun getAllPlayers(): LiveData<List<Player>>
+
+    @Query("SELECT COUNT(*) FROM player_name_score_table")
+    suspend fun getNumberOfPlayers(): Int?
 }

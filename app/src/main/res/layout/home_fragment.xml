@@ -47,7 +47,6 @@
             android:text="@string/leaderboard_button"
             android:onClick="@{() -> viewModel.onLeaderTapped()}"
             app:layout_constraintEnd_toEndOf="@+id/playButton"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/playButton"
             app:layout_constraintTop_toBottomOf="@+id/playButton">
 
@@ -61,7 +60,6 @@
             android:text="@string/settings_button"
             android:onClick="@{() -> viewModel.onSettingsTapped()}"
             app:layout_constraintEnd_toEndOf="@+id/leaderButton"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/leaderButton"
             app:layout_constraintTop_toBottomOf="@+id/leaderButton">
 
@@ -73,7 +71,6 @@
             android:layout_marginTop="@dimen/button_top_margin"
             android:text="@string/quit_button"
             app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/appCompatButton"
             app:layout_constraintTop_toBottomOf="@+id/appCompatButton">
 

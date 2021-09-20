@@ -1,5 +1,6 @@
 package com.example.quickmaths.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -39,10 +40,46 @@ class LostFragment : Fragment() {
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 
-        setScore()
         setupObservation()
+        setScore()
+        setupHighScore()
 
         return binding.root
+    }
+
+    private fun setupHighScore() {
+        val args = LostFragmentArgs.fromBundle(requireArguments())
+        val sharedPref = activity?.getSharedPreferences(
+            getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        )
+        if (sharedPref != null) {
+            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key)
+
+            if (sharedPref.getInt(
+                    getString(R.string.saved_high_score_key),
+                    defaultValue
+                ) < args.numPoints
+            ) {
+                sharedPref.edit()
+                    .putInt(getString(R.string.saved_high_score_key), args.numPoints)
+                    .apply()
+            }
+
+            val highScore =
+                sharedPref?.getInt(getString(R.string.saved_high_score_key), defaultValue)
+
+            setHighScore(highScore)
+        }
+    }
+
+    private fun setHighScore(highScore: Int) {
+        binding.tvHighestScoreNumber.setText(highScore.toString())
+    }
+
+    private fun setScore() {
+        val args = LostFragmentArgs.fromBundle(requireArguments())
+        binding.tvScore.setText(args.numPoints.toString())
     }
 
     private fun setupObservation() {
@@ -57,14 +94,9 @@ class LostFragment : Fragment() {
                 navController.navigate(LostFragmentDirections.actionLostFragmentToLeaderFragment())
             })
         viewModel.numberOfPlayers.observe(viewLifecycleOwner,
-        Observer { numberOfPlayers ->
-            binding.playerStats.setText(numberOfPlayers.toString())
-        })
-    }
-
-    private fun setScore() {
-        val args = LostFragmentArgs.fromBundle(requireArguments())
-        binding.tvScore.setText(args.numPoints.toString())
+            Observer { numberOfPlayers ->
+                binding.playerStats.setText(numberOfPlayers.toString())
+            })
     }
 
 

@@ -15,11 +15,13 @@
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/layout/settings_fragment.xml" value="0.25" />
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/menu/navdrawer_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/AplicatieMate/QuickMaths/app/src/main/res/menu/options_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/VictorySquarePartners/clone4/QuickMaths/app/src/main/res/layout/leader_fragment.xml" value="0.3546875" />
+        <entry key="..\:/VictorySquarePartners/clone4/QuickMaths/app/src/main/res/layout/lost_fragment.xml" value="0.23846153846153847" />
         <entry key="..\:/VictorySquarePartners/clone4/QuickMaths/app/src/main/res/layout/play_fragment.xml" value="0.23846153846153847" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

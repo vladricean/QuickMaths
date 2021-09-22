@@ -19,6 +19,7 @@ import android.widget.TextView
 import androidx.databinding.InverseBindingAdapter
 
 import androidx.databinding.BindingAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 class LostViewModel(
     val database: PlayerDatabaseDao,

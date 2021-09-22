@@ -3,6 +3,7 @@ package com.example.quickmaths.ui
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import androidx.databinding.BaseObservable
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI

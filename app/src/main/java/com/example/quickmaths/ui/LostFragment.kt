@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.databinding.LostFragmentBinding
+import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.viewmodels.LostViewModel
 import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
 import java.lang.StringBuilder
@@ -41,7 +42,7 @@ class LostFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupObservation()
-        setScore()
+//        setScore()
         setupHighScore()
 
         return binding.root

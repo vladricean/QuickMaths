@@ -1,12 +1,14 @@
 package com.example.quickmaths.viewmodels
 
 import android.app.Application
+import androidx.databinding.BaseObservable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.quickmaths.database.Player
 import com.example.quickmaths.database.PlayerDatabaseDao
+import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ class LostViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
+
     private val onNavigateToPlayFragment =
         SingleLiveEvent<Void>()
     private val onNavigateToLeaderFragment =
@@ -30,6 +33,15 @@ class LostViewModel(
     val numberOfPlayers: LiveData<Int>
             get() = _numberOfPlayers
 
+    private val _onNewBestScoreState = MutableLiveData(BestScoreState.DEFAULT)
+    val onNewBestScoreState: LiveData<BestScoreState>
+            get() = _onNewBestScoreState
+
+//    private val _score = MutableLiveData<Int>()
+//    val score: LiveData<Int>
+//        get() = _score
+    val score = MutableLiveData<Int>()
+
     fun onClickAddPlayer(){
         viewModelScope.launch {
             val newPlayer = Player()
@@ -37,6 +49,10 @@ class LostViewModel(
             player.value = get(1)
             _numberOfPlayers.value = getNumberOfPlayers()
         }
+    }
+
+    fun onNewBestScoreState(): MutableLiveData<BestScoreState> {
+        return _onNewBestScoreState
     }
 
     private suspend fun getNumberOfPlayers(): Int? {

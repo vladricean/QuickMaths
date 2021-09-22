@@ -65,6 +65,10 @@ class PlayViewModel() : ViewModel() {
         timer.start()
     }
 
+    fun getCurrentScore(): Int {
+        return score.value!!
+    }
+
     private fun checkUserAnswer() {
         if (userAnswer.value == answer) {
             onCorrect()
@@ -74,7 +78,7 @@ class PlayViewModel() : ViewModel() {
     private fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
         val plus = Random.nextBoolean()
-        if(plus == true){
+        if (plus == true) {
             firstNumber = Random.nextInt(1, 10)
             secondNumber = Random.nextInt(1, 10)
             _question.value = "${firstNumber} + ${secondNumber}"
@@ -89,13 +93,13 @@ class PlayViewModel() : ViewModel() {
         timer.cancel()
         timer.start()
     }
-    
+
     private fun onLost() {
         _getScoreAndNavigateToLost.value = _score.value
     }
 
     fun onClickNumber(number: Int) {
-        if(number == -1){ // Del button
+        if (number == -1) { // Del button
             userAnswer.value = 0
         } else {
             if (userAnswer.value!! < 9999999) {

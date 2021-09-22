@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.kapt'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
+    id "dagger.hilt.android.plugin"
 }
 
 android {
@@ -89,4 +91,13 @@ dependencies {
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:2.4.0-alpha04")
 
+    // HILT Dependency Injection
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }

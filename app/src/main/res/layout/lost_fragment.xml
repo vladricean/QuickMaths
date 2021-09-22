@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:text="@={viewModel.score}"
+            android:text="@{viewModel.score.toString()}"
             android:textSize="@dimen/number_size"
             app:layout_constraintEnd_toEndOf="@+id/tv_you_scored"
             app:layout_constraintStart_toStartOf="@+id/tv_you_scored"

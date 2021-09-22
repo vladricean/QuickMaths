@@ -42,7 +42,7 @@ class LostFragment : Fragment() {
         binding.viewModel = viewModel
 
         setupObservation()
-//        setScore()
+        setScore()
         setupHighScore()
 
         return binding.root
@@ -80,7 +80,7 @@ class LostFragment : Fragment() {
 
     private fun setScore() {
         val args = LostFragmentArgs.fromBundle(requireArguments())
-        binding.tvScore.setText(args.numPoints.toString())
+        viewModel.score.value = args.numPoints
     }
 
     private fun setupObservation() {

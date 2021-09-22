@@ -14,7 +14,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import android.widget.TextView
 
+import androidx.databinding.InverseBindingAdapter
+
+import androidx.databinding.BindingAdapter
 
 class LostViewModel(
     val database: PlayerDatabaseDao,
@@ -48,10 +52,6 @@ class LostViewModel(
         }
     }
 
-    fun applyScore(){
-        score.value = 5
-    }
-
     fun onNewBestScoreState(): MutableLiveData<BestScoreState> {
         return _onNewBestScoreState
     }
@@ -83,4 +83,6 @@ class LostViewModel(
     fun onViewLeaderboardPressed() {
         onNavigateToLeaderFragment.call()
     }
+
+
 }

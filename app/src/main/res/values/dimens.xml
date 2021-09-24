@@ -17,4 +17,5 @@
     <dimen name="margin_top_big">36dp</dimen>
     <dimen name="constraint_bottom">16dp</dimen>
     <dimen name="small_margin">4dp</dimen>
+    <dimen name="margin_number_big">32dp</dimen>
 </resources>

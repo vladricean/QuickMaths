@@ -5,89 +5,99 @@
     tools:context=".ui.HomeFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.quickmaths.viewmodels.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline"
-            app:layout_constraintGuide_begin="130dp"
-            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        </androidx.constraintlayout.widget.Guideline>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/playButton"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginStart="@dimen/button_start_margin"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:layout_marginEnd="@dimen/button_end_margin"
-            android:onClick="@{() -> viewModel.onPlayTapped()}"
-            android:text="@string/play_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline">
+            </androidx.constraintlayout.widget.Guideline>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/playButton"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/button_start_margin"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:layout_marginEnd="@dimen/button_end_margin"
+                android:onClick="@{() -> viewModel.onPlayTapped()}"
+                android:text="@string/play_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/leaderButton"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:text="@string/leaderboard_button"
-            android:onClick="@{() -> viewModel.onLeaderTapped()}"
-            app:layout_constraintEnd_toEndOf="@+id/playButton"
-            app:layout_constraintStart_toStartOf="@+id/playButton"
-            app:layout_constraintTop_toBottomOf="@+id/playButton">
+            </androidx.appcompat.widget.AppCompatButton>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/leaderButton"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:onClick="@{() -> viewModel.onLeaderTapped()}"
+                android:text="@string/leaderboard_button"
+                app:layout_constraintEnd_toEndOf="@+id/playButton"
+                app:layout_constraintStart_toStartOf="@+id/playButton"
+                app:layout_constraintTop_toBottomOf="@+id/playButton">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:text="@string/settings_button"
-            android:onClick="@{() -> viewModel.onSettingsTapped()}"
-            app:layout_constraintEnd_toEndOf="@+id/leaderButton"
-            app:layout_constraintStart_toStartOf="@+id/leaderButton"
-            app:layout_constraintTop_toBottomOf="@+id/leaderButton">
+            </androidx.appcompat.widget.AppCompatButton>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:onClick="@{() -> viewModel.onSettingsTapped()}"
+                android:text="@string/settings_button"
+                app:layout_constraintEnd_toEndOf="@+id/leaderButton"
+                app:layout_constraintStart_toStartOf="@+id/leaderButton"
+                app:layout_constraintTop_toBottomOf="@+id/leaderButton">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:text="@string/quit_button"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
-            app:layout_constraintStart_toStartOf="@+id/appCompatButton"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton">
+            </androidx.appcompat.widget.AppCompatButton>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:layout_marginBottom="@dimen/constraint_bottom"
+                android:text="@string/quit_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
+                app:layout_constraintStart_toStartOf="@+id/appCompatButton"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatButton">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_tv"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            </androidx.appcompat.widget.AppCompatButton>
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_tv"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.AppCompatTextView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </layout>

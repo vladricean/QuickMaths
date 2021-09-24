@@ -12,6 +12,7 @@ import com.example.quickmaths.databinding.SettingsFragmentBinding
 import com.example.quickmaths.viewmodels.SettingsViewModel
 import com.example.quickmaths.viewmodelsfactory.SettingsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,7 +33,7 @@ class SettingsFragment: Fragment() {
         binding.lifecycleOwner = this
 
         // Hilt
-        println("Settings fragment: ${randomString}")
+        Timber.i(randomString)
 
         setHasOptionsMenu(true)
 

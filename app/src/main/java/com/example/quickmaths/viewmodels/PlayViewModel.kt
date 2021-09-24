@@ -65,10 +65,6 @@ class PlayViewModel() : ViewModel() {
         timer.start()
     }
 
-    fun getCurrentScore(): Int {
-        return score.value!!
-    }
-
     private fun checkUserAnswer() {
         if (userAnswer.value == answer) {
             onCorrect()
@@ -77,18 +73,10 @@ class PlayViewModel() : ViewModel() {
 
     private fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
-        val plus = Random.nextBoolean()
-        if (plus == true) {
-            firstNumber = Random.nextInt(1, 10)
-            secondNumber = Random.nextInt(1, 10)
-            _question.value = "${firstNumber} + ${secondNumber}"
-            answer = firstNumber + secondNumber
-        } else {
-            firstNumber = Random.nextInt(10, 20)
-            secondNumber = Random.nextInt(1, 10)
-            _question.value = "${firstNumber} - ${secondNumber}"
-            answer = firstNumber - secondNumber
-        }
+        firstNumber = Random.nextInt(1, 2)
+        secondNumber = Random.nextInt(1, 2)
+        _question.value = "${firstNumber} + ${secondNumber}"
+        answer = firstNumber + secondNumber
         userAnswer.value = 0
         timer.cancel()
         timer.start()

@@ -29,11 +29,9 @@ class LostViewModel(
     val numberOfPlayers: LiveData<Int>
             get() = _numberOfPlayers
 
-    private val _onNewBestScoreState = MutableLiveData(BestScoreState.DEFAULT)
-    val onNewBestScoreState: LiveData<BestScoreState>
-            get() = _onNewBestScoreState
-
+    val onNewBestScoreState = MutableLiveData(BestScoreState.DEFAULT)
     val score = MutableLiveData<Int>()
+    val highScore = MutableLiveData<Int>()
 
     fun onClickAddPlayer(){
         viewModelScope.launch {
@@ -44,8 +42,12 @@ class LostViewModel(
         }
     }
 
+    init {
+        onNewBestScoreState.value = BestScoreState.DEFAULT
+    }
+
     fun onNewBestScoreState(): MutableLiveData<BestScoreState> {
-        return _onNewBestScoreState
+        return onNewBestScoreState
     }
 
     private suspend fun getNumberOfPlayers(): Int? {

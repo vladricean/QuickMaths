@@ -47,12 +47,12 @@ class LostFragment: Fragment() {
 
         setupObservation()
         setScore()
-        setupHighScore()
+        getHighScoreFromSharedPref()
 
         return binding.root
     }
 
-    private fun setupHighScore() {
+    private fun getHighScoreFromSharedPref() {
         val args = LostFragmentArgs.fromBundle(requireArguments())
         val sharedPref = activity?.getSharedPreferences(
             getString(R.string.preference_file_key),
@@ -66,6 +66,8 @@ class LostFragment: Fragment() {
                     defaultValue
                 ) < args.numPoints
             ) {
+                setNewBestScoreState()
+
                 sharedPref.edit()
                     .putInt(getString(R.string.saved_high_score_key), args.numPoints)
                     .apply()
@@ -78,8 +80,12 @@ class LostFragment: Fragment() {
         }
     }
 
+    private fun setNewBestScoreState(){
+        viewModel.onNewBestScoreState.value = BestScoreState.NEW_BEST_SCORE
+    }
+
     private fun setHighScore(highScore: Int) {
-        binding.tvHighestScoreNumber.setText(highScore.toString())
+        viewModel.highScore.value = highScore
     }
 
     private fun setScore() {
@@ -102,6 +108,7 @@ class LostFragment: Fragment() {
             Observer { numberOfPlayers ->
                 binding.playerStats.setText(numberOfPlayers.toString())
             })
+
     }
 
 

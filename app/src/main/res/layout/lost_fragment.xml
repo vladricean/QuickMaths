@@ -9,159 +9,169 @@
         <variable
             name="viewModel"
             type="com.example.quickmaths.viewmodels.LostViewModel" />
+
         <variable
             name="playViewModel"
             type="com.example.quickmaths.viewmodels.PlayViewModel" />
-        <import type="com.example.quickmaths.enums.BestScoreState"/>
-        <import type="android.view.View"/>
+
+        <import type="com.example.quickmaths.enums.BestScoreState" />
+
+        <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_you_lost"
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/constraint_bottom"
-            android:text="@string/you_lost"
-            app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_you_lost"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/constraint_bottom"
+                android:text="@string/you_lost"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            </androidx.appcompat.widget.AppCompatTextView>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_you_scored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:text="@string/you_scored"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_you_scored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:text="@string/you_scored"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineTop">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:text="@={viewModel.score}"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toEndOf="@+id/tv_you_scored"
-            app:layout_constraintStart_toStartOf="@+id/tv_you_scored"
-            app:layout_constraintTop_toBottomOf="@+id/tv_you_scored"
-            tools:text="200">
+            </androidx.appcompat.widget.AppCompatTextView>
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@={viewModel.score}"
+                android:textSize="@dimen/number_size"
+                app:layout_constraintEnd_toEndOf="@+id/tv_you_scored"
+                app:layout_constraintStart_toStartOf="@+id/tv_you_scored"
+                app:layout_constraintTop_toBottomOf="@+id/tv_you_scored"
+                tools:text="200">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45">
+            </androidx.appcompat.widget.AppCompatTextView>
 
-        </androidx.constraintlayout.widget.Guideline>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.45">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_try_again"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onPlayAgainPressed()}"
-            android:text="@string/try_again"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline">
+            </androidx.constraintlayout.widget.Guideline>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_try_again"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:onClick="@{() -> viewModel.onPlayAgainPressed()}"
+                android:text="@string/try_again"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_new_best_score"
-            style="@style/TitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_big"
-            android:text="@string/new_best_score"
-            android:visibility="@{viewModel.onNewBestScoreState() == BestScoreState.DEFAULT ? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="@+id/btn_try_again"
-            app:layout_constraintStart_toStartOf="@+id/btn_try_again"
-            app:layout_constraintTop_toBottomOf="@+id/btn_try_again">
+            </androidx.appcompat.widget.AppCompatButton>
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_new_best_score"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_big"
+                android:text="@string/new_best_score"
+                android:visibility="@{viewModel.onNewBestScoreState() == BestScoreState.NEW_BEST_SCORE ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="@+id/btn_try_again"
+                app:layout_constraintStart_toStartOf="@+id/btn_try_again"
+                app:layout_constraintTop_toBottomOf="@+id/btn_try_again">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_view_leaderboard"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onViewLeaderboardPressed()}"
-            android:text="@string/view_leaderboard"
-            app:layout_constraintEnd_toEndOf="@+id/tv_new_best_score"
-            app:layout_constraintStart_toStartOf="@+id/tv_new_best_score"
-            app:layout_constraintTop_toBottomOf="@+id/tv_new_best_score">
+            </androidx.appcompat.widget.AppCompatTextView>
 
-        </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_view_leaderboard"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:onClick="@{() -> viewModel.onViewLeaderboardPressed()}"
+                android:text="@string/view_leaderboard"
+                android:visibility="@{viewModel.onNewBestScoreState() == BestScoreState.NEW_BEST_SCORE ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="@+id/tv_new_best_score"
+                app:layout_constraintStart_toStartOf="@+id/tv_new_best_score"
+                app:layout_constraintTop_toBottomOf="@+id/tv_new_best_score">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_add_player"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:onClick="@{() -> viewModel.onClickAddPlayer()}"
-            android:text="ADD PLAYER"
-            app:layout_constraintEnd_toEndOf="@+id/btn_view_leaderboard"
-            app:layout_constraintStart_toStartOf="@+id/btn_view_leaderboard"
-            app:layout_constraintTop_toBottomOf="@+id/btn_view_leaderboard" />
+            </androidx.appcompat.widget.AppCompatButton>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/playerStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:singleLine="false"
-            android:text="Player stats"
-            app:layout_constraintEnd_toEndOf="@+id/btn_add_player"
-            app:layout_constraintStart_toStartOf="@+id/btn_add_player"
-            app:layout_constraintTop_toBottomOf="@+id/btn_add_player" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_player"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:onClick="@{() -> viewModel.onClickAddPlayer()}"
+                android:text="ADD PLAYER"
+                app:layout_constraintEnd_toEndOf="@+id/btn_view_leaderboard"
+                app:layout_constraintStart_toStartOf="@+id/btn_view_leaderboard"
+                app:layout_constraintTop_toBottomOf="@+id/btn_view_leaderboard" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_highest_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/constraint_top"
-            android:text="@string/highest_score"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toEndOf="@+id/tv_score"
-            app:layout_constraintStart_toStartOf="@+id/tv_score"
-            app:layout_constraintTop_toBottomOf="@+id/tv_score" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/playerStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:singleLine="false"
+                android:text="Player stats"
+                app:layout_constraintEnd_toEndOf="@+id/btn_add_player"
+                app:layout_constraintStart_toStartOf="@+id/btn_add_player"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_player" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_highest_score_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:text="@string/number_zero"
-            android:textSize="@dimen/number_size"
-            app:layout_constraintEnd_toEndOf="@+id/tv_highest_score"
-            app:layout_constraintStart_toStartOf="@+id/tv_highest_score"
-            app:layout_constraintTop_toBottomOf="@+id/tv_highest_score"
-            tools:text="300" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_highest_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:text="@string/highest_score"
+                android:textSize="@dimen/number_size"
+                app:layout_constraintEnd_toEndOf="@+id/tv_score"
+                app:layout_constraintStart_toStartOf="@+id/tv_score"
+                app:layout_constraintTop_toBottomOf="@+id/tv_score" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_highest_score_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@={viewModel.highScore}"
+                android:textSize="@dimen/number_size"
+                app:layout_constraintEnd_toEndOf="@+id/tv_highest_score"
+                app:layout_constraintStart_toStartOf="@+id/tv_highest_score"
+                app:layout_constraintTop_toBottomOf="@+id/tv_highest_score"
+                tools:text="300" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
 </layout>

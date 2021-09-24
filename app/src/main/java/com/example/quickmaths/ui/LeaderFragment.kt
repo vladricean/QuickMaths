@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.quickmaths.R
 import com.example.quickmaths.viewmodels.LeaderViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LeaderFragment : Fragment() {
 
     companion object {

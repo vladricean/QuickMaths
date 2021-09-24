@@ -10,7 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.databinding.PlayFragmentBinding
 import com.example.quickmaths.viewmodels.PlayViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlayFragment : Fragment() {
 
     companion object {

@@ -15,7 +15,7 @@ class PlayViewModel() : ViewModel() {
     companion object {
         private const val DONE = 0L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 2500L
+        private const val COUNTDOWN_TIME = 15000L
     }
 
     private var firstNumber = 0

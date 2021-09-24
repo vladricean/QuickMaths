@@ -5,28 +5,35 @@
     tools:context=".ui.LeaderFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.quickmaths.viewmodels.LeaderViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="188dp"
-            android:text="@string/leader_fragment"
-            style="@style/TitleText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TitleText"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="188dp"
+                android:text="@string/leader_fragment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+            </androidx.appcompat.widget.AppCompatTextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </layout>

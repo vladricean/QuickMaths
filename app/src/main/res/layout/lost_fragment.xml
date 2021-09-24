@@ -19,13 +19,13 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_you_lost"
@@ -140,8 +140,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/constraint_top"
+                android:layout_marginBottom="16dp"
                 android:singleLine="false"
                 android:text="Player stats"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/btn_add_player"
                 app:layout_constraintStart_toStartOf="@+id/btn_add_player"
                 app:layout_constraintTop_toBottomOf="@+id/btn_add_player" />
@@ -171,7 +173,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 
 </layout>

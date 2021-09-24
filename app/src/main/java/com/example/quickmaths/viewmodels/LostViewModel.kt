@@ -1,7 +1,6 @@
 package com.example.quickmaths.viewmodels
 
 import android.app.Application
-import androidx.databinding.BaseObservable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,22 +9,14 @@ import com.example.quickmaths.database.Player
 import com.example.quickmaths.database.PlayerDatabaseDao
 import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
-import android.widget.TextView
-
-import androidx.databinding.InverseBindingAdapter
-
-import androidx.databinding.BindingAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 class LostViewModel(
     val database: PlayerDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
-
 
     private val onNavigateToPlayFragment =
         SingleLiveEvent<Void>()

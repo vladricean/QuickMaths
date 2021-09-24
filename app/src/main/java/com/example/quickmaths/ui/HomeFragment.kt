@@ -12,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.HomeFragmentBinding
 import com.example.quickmaths.viewmodels.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     companion object {

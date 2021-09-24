@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
@@ -16,9 +17,12 @@ import com.example.quickmaths.databinding.LostFragmentBinding
 import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.viewmodels.LostViewModel
 import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.StringBuilder
+import javax.inject.Inject
 
-class LostFragment : Fragment() {
+@AndroidEntryPoint
+class LostFragment: Fragment() {
 
     private lateinit var binding: LostFragmentBinding
     private lateinit var viewModel: LostViewModel

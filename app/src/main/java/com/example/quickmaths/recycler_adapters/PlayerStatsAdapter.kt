@@ -22,27 +22,39 @@ class PlayerStatsAdapter : RecyclerView.Adapter<PlayerStatsAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        val res = holder.itemView.context.resources
-        holder.playerImage.setImageResource(
-            if(item.score <= 1){
-            R.drawable.ic_launcher_background
-        } else{
-            R.drawable.ic_launcher_background
-        })
-
-        holder.playerName.text = item.name
-        holder.playerScore.text = item.score.toString()
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item_player_stats, parent, false)
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
         val playerName: TextView = itemView.findViewById(R.id.player_name)
         val playerScore: TextView = itemView.findViewById(R.id.player_score)
         val playerImage: ImageView = itemView.findViewById(R.id.player_image)
+
+        fun bind(item: Player){
+//            val res = itemView.context.resources
+            playerName.text = item.name
+            playerScore.text = item.score.toString()
+            playerImage.setImageResource(
+                if (item.score <= 1) {
+                    R.drawable.ic_launcher_background
+                } else {
+                    R.drawable.ic_launcher_background
+                }
+            )
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.list_item_player_stats, parent, false)
+                return ViewHolder(view)
+            }
+        }
     }
+
+
 }

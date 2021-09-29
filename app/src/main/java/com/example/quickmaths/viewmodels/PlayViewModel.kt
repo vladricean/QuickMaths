@@ -15,7 +15,7 @@ class PlayViewModel() : ViewModel() {
     companion object {
         private const val DONE = 0L
         private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 15000L
+        private const val COUNTDOWN_TIME = 2500L
     }
 
     private var firstNumber = 0
@@ -58,8 +58,8 @@ class PlayViewModel() : ViewModel() {
     init {
         _score.value = 0
         userAnswer.value = 0
-        firstNumber = Random.nextInt(1, 10)
-        secondNumber = Random.nextInt(1, 10)
+        firstNumber = Random.nextInt(1, 2)
+        secondNumber = Random.nextInt(1, 2)
         _question.value = "${firstNumber} + ${secondNumber}"
         answer = firstNumber + secondNumber
         timer.start()

@@ -23,15 +23,8 @@ class PlayerStatsAdapter : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(Pl
     class ViewHolder private constructor(val binding: ListItemPlayerStatsBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Player) {
-            binding.playerName.text = item.name
-            binding.playerScore.text = item.score.toString()
-            binding.playerImage.setImageResource(
-                if (item.score <= 1) {
-                    R.drawable.ic_launcher_background
-                } else {
-                    R.drawable.ic_launcher_background
-                }
-            )
+            binding.playerStats = item
+            binding.executePendingBindings()
         }
 
         companion object {

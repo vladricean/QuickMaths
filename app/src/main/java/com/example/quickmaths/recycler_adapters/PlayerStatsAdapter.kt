@@ -6,22 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quickmaths.R
 import com.example.quickmaths.database.Player
 
-class PlayerStatsAdapter : RecyclerView.Adapter<PlayerStatsAdapter.ViewHolder>() {
-
-    var data = listOf<Player>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount() = data.size
+class PlayerStatsAdapter : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(PlayerDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -55,6 +49,15 @@ class PlayerStatsAdapter : RecyclerView.Adapter<PlayerStatsAdapter.ViewHolder>()
             }
         }
     }
+}
 
+class PlayerDiffCallback : DiffUtil.ItemCallback<Player>() {
+    override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {
+        return oldItem.playerId == newItem.playerId
+    }
+
+    override fun areContentsTheSame(oldItem: Player, newItem: Player): Boolean {
+        return oldItem == newItem
+    }
 
 }

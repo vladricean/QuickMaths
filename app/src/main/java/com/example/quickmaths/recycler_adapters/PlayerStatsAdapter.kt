@@ -1,5 +1,6 @@
 package com.example.quickmaths.recycler_adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,7 +9,7 @@ import com.example.quickmaths.R
 import com.example.quickmaths.database.Player
 import com.example.quickmaths.util.TextItemViewHolder
 
-class PlayerStatsAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
+class PlayerStatsAdapter : RecyclerView.Adapter<TextItemViewHolder>() {
 
     var data = listOf<Player>()
         set(value) {
@@ -20,6 +21,12 @@ class PlayerStatsAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
 
     override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
         val item = data[position]
+        if (item.score <= 1) {
+            holder.textView.setTextColor(Color.RED)
+        } else {
+            holder.textView.setTextColor(Color.BLACK)
+
+        }
         holder.textView.text = item.score.toString()
     }
 

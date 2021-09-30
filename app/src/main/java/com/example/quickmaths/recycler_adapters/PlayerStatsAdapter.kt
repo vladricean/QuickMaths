@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quickmaths.database.Player
 import com.example.quickmaths.databinding.ListItemPlayerStatsBinding
 
-class PlayerStatsAdapter(val clickListener: PlayerListener) : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(PlayerDiffCallback()) {
+class PlayerStatsAdapter(val clickListener: PlayerListener) :
+    ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(PlayerDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -19,7 +20,8 @@ class PlayerStatsAdapter(val clickListener: PlayerListener) : ListAdapter<Player
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ListItemPlayerStatsBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(val binding: ListItemPlayerStatsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Player, clickListener: PlayerListener) {
             binding.playerStats = item

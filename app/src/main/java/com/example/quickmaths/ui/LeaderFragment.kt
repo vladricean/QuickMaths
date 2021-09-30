@@ -66,7 +66,7 @@ class LeaderFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner,
         Observer { response ->
-            binding.tvLeaderTitle.text = response
+            binding.tvLeaderTitle.text = response.toString()
         })
 
 

@@ -7,11 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quickmaths.database.PlayerDatabaseDao
 import com.example.quickmaths.network.MarsApi
-import com.example.quickmaths.network.MarsProperty
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.lang.Exception
 
 class LeaderViewModel(
     dataSource: PlayerDatabaseDao,
@@ -49,7 +46,9 @@ class LeaderViewModel(
         viewModelScope.launch {
             try {
                 val listResult = MarsApi.retrofitService.getProperties()
-                _response.value = "Success: ${listResult.toString()} Mars properties retrieved"
+                _response.value =
+                    "Success: ${listResult.size} Mars properties retrieved"
+
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }

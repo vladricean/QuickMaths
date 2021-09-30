@@ -37,7 +37,11 @@
         android:id="@+id/leaderFragment"
         android:name="com.example.quickmaths.ui.LeaderFragment"
         android:label="leader_fragment"
-        tools:layout="@layout/leader_fragment" />
+        tools:layout="@layout/leader_fragment" >
+        <action
+            android:id="@+id/action_leaderFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.quickmaths.ui.SettingsFragment"
@@ -59,5 +63,14 @@
         <argument
             android:name="numPoints"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.quickmaths.ui.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="playerKey"
+            app:argType="long" />
     </fragment>
 </navigation>

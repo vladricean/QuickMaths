@@ -3,7 +3,9 @@ package com.example.quickmaths.util
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.widget.TextView
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.quickmaths.database.Player
 
 fun formatPlayer(player: Player): Spanned {
@@ -19,3 +21,5 @@ fun formatPlayer(player: Player): Spanned {
         return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }
+
+class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)

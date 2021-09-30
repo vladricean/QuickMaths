@@ -11,7 +11,7 @@ data class Player(
     var playerId: Long = 0,
 
     @ColumnInfo
-    var name: String = "",
+    var name: String = "Ema",
 
     @ColumnInfo
     var score: Int = 0

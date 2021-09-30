@@ -64,6 +64,11 @@ class LeaderFragment : Fragment() {
             }
         })
 
+        viewModel.response.observe(viewLifecycleOwner,
+        Observer { response ->
+            binding.tvLeaderTitle.text = response
+        })
+
 
 
         return binding.root

@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.kapt'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id "dagger.hilt.android.plugin"
 }
@@ -100,6 +101,13 @@ dependencies {
 
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
 
 }
 

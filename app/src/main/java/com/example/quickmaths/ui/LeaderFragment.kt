@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.databinding.LeaderFragmentBinding
@@ -28,7 +29,8 @@ class LeaderFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.leader_fragment, container, false)
+            inflater, R.layout.leader_fragment, container, false
+        )
 
         val application = requireNotNull(this.activity).application
 
@@ -41,18 +43,31 @@ class LeaderFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        val adapter = PlayerStatsAdapter(PlayerListener { playerId -> Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show() })
+        val adapter = PlayerStatsAdapter(PlayerListener { playerId ->
+            Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
+            viewModel.onPlayerClicked(playerId)
+        })
         binding.playersList.adapter = adapter
 
         viewModel.players.observe(viewLifecycleOwner, Observer {
-            it?.let{
+            it?.let {
                 adapter.submitList(it)
             }
         })
 
+        viewModel.navigateToPlayerDetail.observe(viewLifecycleOwner,
+        Observer { player ->
+            player?.let {
+                this.findNavController().navigate(
+                    LeaderFragmentDirections.actionLeaderFragmentToDetailFragment(player))
+                viewModel.onPlayerDetailNavigated()
+            }
+        })
+
+
+
         return binding.root
     }
-
 
 
 }

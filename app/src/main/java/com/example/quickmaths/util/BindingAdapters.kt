@@ -18,18 +18,24 @@ fun getText(view: TextView): Int {
 }
 
 @BindingAdapter("playerName")
-fun TextView.setName(item: Player) {
-    text = item.name
+fun TextView.setName(item: Player?) {
+    item?.let {
+        text = item.name
+    }
 }
 
 @BindingAdapter("playerScoreString")
-fun TextView.setScore(item: Player) {
-    text = item.score.toString()
+fun TextView.setScore(item: Player?) {
+    item?.let {
+        text = item.score.toString()
+    }
 }
 
 @BindingAdapter("playerImage")
-fun ImageView.setPlayerImage(item: Player){
-    setImageResource(R.drawable.ic_launcher_background)
+fun ImageView.setPlayerImage(item: Player?){
+    item?.let {
+        setImageResource(R.drawable.ic_launcher_background)
+    }
 }
 
 

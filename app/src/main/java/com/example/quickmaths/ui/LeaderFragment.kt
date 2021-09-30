@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.databinding.LeaderFragmentBinding
+import com.example.quickmaths.recycler_adapters.PhotoGridAdapter
 import com.example.quickmaths.recycler_adapters.PlayerListener
 import com.example.quickmaths.recycler_adapters.PlayerStatsAdapter
 import com.example.quickmaths.viewmodels.LeaderViewModel
@@ -47,7 +48,9 @@ class LeaderFragment : Fragment() {
             Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
             viewModel.onPlayerClicked(playerId)
         })
-        binding.playersList.adapter = adapter
+//        binding.rvPlayersList.adapter = adapter
+
+        binding.rvPlayersList.adapter = PhotoGridAdapter()
 
         viewModel.players.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -68,7 +71,6 @@ class LeaderFragment : Fragment() {
         Observer { response ->
             binding.tvLeaderTitle.text = response.toString()
         })
-
 
 
         return binding.root

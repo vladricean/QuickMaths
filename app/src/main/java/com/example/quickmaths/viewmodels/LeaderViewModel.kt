@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.quickmaths.database.PlayerDatabaseDao
 import com.example.quickmaths.network.MarsApi
+import com.example.quickmaths.network.MarsProperty
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -25,6 +26,14 @@ class LeaderViewModel(
     private val _navigateToPlayerDetail = MutableLiveData<Long?>()
     val navigateToPlayerDetail: MutableLiveData<Long?>
             get() = _navigateToPlayerDetail
+
+    private val _property = MutableLiveData<MarsProperty>()
+    val property: LiveData<MarsProperty>
+        get() = _property
+
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     val database = dataSource
 
@@ -45,13 +54,12 @@ class LeaderViewModel(
     private fun getMarsRealEstateProperties() {
         viewModelScope.launch {
             try {
-                val listResult = MarsApi.retrofitService.getProperties()
-                _response.value =
-                    "Success: ${listResult.size} Mars properties retrieved"
-
+                _properties.value = MarsApi.retrofitService.getProperties()
+                _response.value = "Success: Mars properties retrieved"
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
         }
     }
 }
+

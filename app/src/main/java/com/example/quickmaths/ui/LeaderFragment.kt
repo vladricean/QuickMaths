@@ -50,7 +50,7 @@ class LeaderFragment : Fragment() {
         })
 //        binding.rvPlayersList.adapter = adapter
 
-        binding.rvPlayersList.adapter = PhotoGridAdapter()
+        binding.photosGrid.adapter = PhotoGridAdapter()
 
         viewModel.players.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -66,12 +66,6 @@ class LeaderFragment : Fragment() {
                 viewModel.onPlayerDetailNavigated()
             }
         })
-
-        viewModel.response.observe(viewLifecycleOwner,
-        Observer { response ->
-            binding.tvLeaderTitle.text = response.toString()
-        })
-
 
         return binding.root
     }

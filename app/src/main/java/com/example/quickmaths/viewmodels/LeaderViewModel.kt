@@ -11,25 +11,20 @@ import com.example.quickmaths.network.MarsProperty
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+enum class MarsApiStatus { LOADING, ERROR, DONE }
+
 class LeaderViewModel(
     dataSource: PlayerDatabaseDao,
     application: Application
 ) : ViewModel() {
 
-    // The internal MutableLiveData String that stores the most recent response
-    private val _response = MutableLiveData<String>()
-
-    // The external immutable LiveData for the response String
-    val response: LiveData<String>
-        get() = _response
+    private val _status = MutableLiveData<MarsApiStatus>()
+    val status: LiveData<MarsApiStatus>
+        get() = _status
 
     private val _navigateToPlayerDetail = MutableLiveData<Long?>()
     val navigateToPlayerDetail: MutableLiveData<Long?>
             get() = _navigateToPlayerDetail
-
-    private val _property = MutableLiveData<MarsProperty>()
-    val property: LiveData<MarsProperty>
-        get() = _property
 
     private val _properties = MutableLiveData<List<MarsProperty>>()
     val properties: LiveData<List<MarsProperty>>
@@ -53,11 +48,13 @@ class LeaderViewModel(
 
     private fun getMarsRealEstateProperties() {
         viewModelScope.launch {
+            _status.value = MarsApiStatus.LOADING
             try {
                 _properties.value = MarsApi.retrofitService.getProperties()
-                _response.value = "Success: Mars properties retrieved"
+                _status.value = MarsApiStatus.DONE
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                _status.value = MarsApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }

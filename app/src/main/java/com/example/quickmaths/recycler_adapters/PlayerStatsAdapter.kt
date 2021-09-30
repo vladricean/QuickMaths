@@ -5,15 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quickmaths.R
 import com.example.quickmaths.database.Player
 import com.example.quickmaths.databinding.ListItemPlayerStatsBinding
 
-class PlayerStatsAdapter : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(PlayerDiffCallback()) {
+class PlayerStatsAdapter(val clickListener: PlayerListener) : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(PlayerDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,9 +21,10 @@ class PlayerStatsAdapter : ListAdapter<Player, PlayerStatsAdapter.ViewHolder>(Pl
 
     class ViewHolder private constructor(val binding: ListItemPlayerStatsBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Player) {
+        fun bind(item: Player, clickListener: PlayerListener) {
             binding.playerStats = item
             binding.executePendingBindings()
+            binding.clickListener = clickListener
         }
 
         companion object {
@@ -45,5 +45,8 @@ class PlayerDiffCallback : DiffUtil.ItemCallback<Player>() {
     override fun areContentsTheSame(oldItem: Player, newItem: Player): Boolean {
         return oldItem == newItem
     }
+}
 
+class PlayerListener(val clickListener: (playerId: Long) -> Unit) {
+    fun onClick(player: Player) = clickListener(player.playerId)
 }

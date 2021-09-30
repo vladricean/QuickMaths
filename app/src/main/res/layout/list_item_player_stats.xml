@@ -7,9 +7,13 @@
         <variable
             name="playerStats"
             type="com.example.quickmaths.database.Player" />
+        <variable
+            name="clickListener"
+            type="com.example.quickmaths.recycler_adapters.PlayerListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> clickListener.onClick(playerStats)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

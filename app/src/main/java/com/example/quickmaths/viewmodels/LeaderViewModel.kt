@@ -1,10 +1,8 @@
 package com.example.quickmaths.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.quickmaths.database.Player
 import com.example.quickmaths.database.PlayerDatabaseDao
 import com.example.quickmaths.network.MathApi
 import com.example.quickmaths.network.PlayerNetwork
@@ -25,17 +23,17 @@ class LeaderViewModel(
 
     private val _navigateToPlayerDetail = MutableLiveData<Long?>()
     val navigateToPlayerDetail: MutableLiveData<Long?>
-            get() = _navigateToPlayerDetail
+        get() = _navigateToPlayerDetail
 
     private val _playersNetwork = MutableLiveData<List<PlayerNetwork>>()
     val playersNetwork: LiveData<List<PlayerNetwork>>
         get() = _playersNetwork
 
-//    val database = dataSource
+    val database = dataSource
 //
 //    val players = database.getAllPlayers()
 
-    fun onPlayerClicked(id: Long){
+    fun onPlayerClicked(id: Long) {
         _navigateToPlayerDetail.value = id
     }
 
@@ -52,9 +50,7 @@ class LeaderViewModel(
             _status.value = MathApiStatus.LOADING
             try {
                 _playersNetwork.value = MathApi.retrofitService.getPlayersFromNetwork()
-                for (item: PlayerNetwork in playersNetwork.value!!){
-                    Timber.i("${item.id.toString()} + ${item.name} \n")
-                }
+//                database.insertAll()
                 _status.value = MathApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = MathApiStatus.ERROR
@@ -62,5 +58,10 @@ class LeaderViewModel(
             }
         }
     }
+
+    private suspend fun insert(player: Player) {
+        database.insert(player)
+    }
+
 }
 

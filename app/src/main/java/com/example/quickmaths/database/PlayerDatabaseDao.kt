@@ -8,6 +8,9 @@ interface PlayerDatabaseDao{
     @Insert
     suspend fun insert(player: Player)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(players: List<Player>)
+
     @Update
     suspend fun update(player: Player)
 

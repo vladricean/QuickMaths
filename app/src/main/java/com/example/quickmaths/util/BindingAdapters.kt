@@ -1,6 +1,5 @@
 package com.example.quickmaths.util
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -11,9 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.quickmaths.R
 import com.example.quickmaths.database.Player
-import com.example.quickmaths.network.MarsProperty
-import com.example.quickmaths.recycler_adapters.PhotoGridAdapter
-import com.example.quickmaths.viewmodels.MarsApiStatus
+import com.example.quickmaths.recycler_adapters.PlayerStatsAdapter
 
 @BindingAdapter("android:text")
 fun setText(view: TextView, value: Int) {
@@ -64,25 +61,25 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 @BindingAdapter("listData")
 fun bindRecyclerView(
     recyclerView: RecyclerView,
-    data: List<MarsProperty>?
+    data: List<Player>?
 ) {
-    val adapter = recyclerView.adapter as PhotoGridAdapter
+    val adapter = recyclerView.adapter as PlayerStatsAdapter
     adapter.submitList(data)
 }
 
-@BindingAdapter("marsApiStatus")
-fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
-    when (status) {
-        MarsApiStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
-        }
-        MarsApiStatus.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_connection_error)
-        }
-        MarsApiStatus.DONE -> {
-            statusImageView.visibility = View.GONE
-        }
-    }
-}
+//@BindingAdapter("marsApiStatus")
+//fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
+//    when (status) {
+//        MarsApiStatus.LOADING -> {
+//            statusImageView.visibility = View.VISIBLE
+//            statusImageView.setImageResource(R.drawable.loading_animation)
+//        }
+//        MarsApiStatus.ERROR -> {
+//            statusImageView.visibility = View.VISIBLE
+//            statusImageView.setImageResource(R.drawable.ic_connection_error)
+//        }
+//        MarsApiStatus.DONE -> {
+//            statusImageView.visibility = View.GONE
+//        }
+//    }
+//}

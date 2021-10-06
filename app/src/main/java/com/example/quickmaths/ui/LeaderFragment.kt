@@ -13,12 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
 import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.databinding.LeaderFragmentBinding
-import com.example.quickmaths.recycler_adapters.PhotoGridAdapter
 import com.example.quickmaths.recycler_adapters.PlayerListener
 import com.example.quickmaths.recycler_adapters.PlayerStatsAdapter
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
-import dagger.hilt.android.AndroidEntryPoint
 
 class LeaderFragment : Fragment() {
 
@@ -48,15 +46,13 @@ class LeaderFragment : Fragment() {
             Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
             viewModel.onPlayerClicked(playerId)
         })
-//        binding.rvPlayersList.adapter = adapter
+        binding.rvPlayersList.adapter = adapter
 
-        binding.photosGrid.adapter = PhotoGridAdapter()
-
-        viewModel.players.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
+//        viewModel.players.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//                adapter.submitList(it)
+//            }
+//        })
 
         viewModel.navigateToPlayerDetail.observe(viewLifecycleOwner,
         Observer { player ->

@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
+private const val BASE_URL = "https://gist.githubusercontent.com/vladricean/4b40386fe58cae241831d9ce4a993366/raw/9c0089cf15d77ceb4301af2405ccb15290b9d98a/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -17,11 +17,11 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface MarsApiService {
-    @GET("realestate")
-    suspend fun getProperties(): List<MarsProperty>
+interface MathApiService {
+    @GET("players.json")
+    suspend fun getPlayersFromNetwork(): List<PlayerNetwork>
 }
 
-object MarsApi {
-    val retrofitService : MarsApiService by lazy { retrofit.create(MarsApiService::class.java) }
+object MathApi {
+    val retrofitService : MathApiService by lazy { retrofit.create(MathApiService::class.java) }
 }

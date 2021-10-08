@@ -129,7 +129,6 @@
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/constraint_top"
-                android:onClick="@{() -> viewModel.onClickAddPlayer()}"
                 android:text="ADD PLAYER"
                 app:layout_constraintEnd_toEndOf="@+id/btn_view_leaderboard"
                 app:layout_constraintStart_toStartOf="@+id/btn_view_leaderboard"

@@ -8,18 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
-import com.example.quickmaths.database.PlayerDatabase
+import com.example.quickmaths.database.PlayersDatabase
 import com.example.quickmaths.databinding.LostFragmentBinding
 import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.viewmodels.LostViewModel
 import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.StringBuilder
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LostFragment: Fragment() {
@@ -33,15 +30,7 @@ class LostFragment: Fragment() {
 
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.lost_fragment, container, false)
-
-        val application = requireNotNull(this.activity).application
-        val dataSource = PlayerDatabase.getInstance(application).playerDatabaseDao
-        val viewModelFactory = LostViewModelFactory(dataSource, application)
-        viewModel =
-            ViewModelProvider(
-                this, viewModelFactory
-            ).get(LostViewModel::class.java)
-
+        viewModel = ViewModelProvider(this).get(LostViewModel::class.java)
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 

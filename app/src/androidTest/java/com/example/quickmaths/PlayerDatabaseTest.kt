@@ -3,8 +3,6 @@ package com.example.quickmaths
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.quickmaths.database.Player
-import com.example.quickmaths.database.PlayerDatabase
 import com.example.quickmaths.database.PlayerDatabaseDao
 import junit.framework.Assert.assertEquals
 import org.junit.After

@@ -2,36 +2,19 @@ package com.example.quickmaths.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.quickmaths.database.Player
-import com.example.quickmaths.database.PlayerDatabaseDao
-import com.example.quickmaths.network.MathApi
-import com.example.quickmaths.network.PlayerNetwork
+import com.example.quickmaths.network.NetworkPlayer
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.Exception
 
-enum class MathApiStatus { LOADING, ERROR, DONE }
-
 class LeaderViewModel(
-    dataSource: PlayerDatabaseDao,
     application: Application
 ) : ViewModel() {
 
-    private val _status = MutableLiveData<MathApiStatus>()
-    val status: LiveData<MathApiStatus>
-        get() = _status
+
 
     private val _navigateToPlayerDetail = MutableLiveData<Long?>()
     val navigateToPlayerDetail: MutableLiveData<Long?>
         get() = _navigateToPlayerDetail
-
-    private val _playersNetwork = MutableLiveData<List<PlayerNetwork>>()
-    val playersNetwork: LiveData<List<PlayerNetwork>>
-        get() = _playersNetwork
-
-    val database = dataSource
-//
-//    val players = database.getAllPlayers()
 
     fun onPlayerClicked(id: Long) {
         _navigateToPlayerDetail.value = id
@@ -41,27 +24,9 @@ class LeaderViewModel(
         _navigateToPlayerDetail.value = null
     }
 
-    init {
-        getPlayersFromInternet()
-    }
 
-    private fun getPlayersFromInternet() {
-        viewModelScope.launch {
-            _status.value = MathApiStatus.LOADING
-            try {
-                _playersNetwork.value = MathApi.retrofitService.getPlayersFromNetwork()
-//                database.insertAll()
-                _status.value = MathApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = MathApiStatus.ERROR
-                _playersNetwork.value = ArrayList()
-            }
-        }
-    }
 
-    private suspend fun insert(player: Player) {
-        database.insert(player)
-    }
+  
 
 }
 

@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface DevMathService {
     @GET("players.json")
-    suspend fun getPlaylist(): NetworkPlayerContainer
+    suspend fun getPlayerslist(): NetworkPlayerContainer
 }
 
 object DevMathNetwork {

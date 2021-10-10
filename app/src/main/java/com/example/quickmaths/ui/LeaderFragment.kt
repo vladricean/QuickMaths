@@ -25,12 +25,12 @@ class LeaderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.playerslist.observe(viewLifecycleOwner,
-//            Observer {
-//                it?.let {
-//                    adapter.submitList(it)
-//                }
-//            })
+        viewModel.playerslist.observe(viewLifecycleOwner,
+            Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
     }
 
     override fun onCreateView(
@@ -44,12 +44,12 @@ class LeaderFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-//        adapter = PlayerStatsAdapter(PlayerListener { playerId ->
-//            Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
-//            viewModel.onPlayerClicked(playerId)
-//        })
-//
-//        binding.playersList.adapter = adapter
+        adapter = PlayerStatsAdapter(PlayerListener { playerId ->
+            Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
+            viewModel.onPlayerClicked(playerId)
+        })
+
+        binding.playersList.adapter = adapter
 
 
 

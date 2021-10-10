@@ -20,7 +20,7 @@ class PlayersRepository(private val database: PlayersDatabase) {
     suspend fun refreshPlayers(){
         withContext(Dispatchers.IO) {
             Timber.d("refresh players is called")
-            val playerslist = DevMathNetwork.devmaths.getPlayerslist()
+            val playerslist = DevMathNetwork.retrofitService.getPlayerslist()
             database.playerDao.insertAll(playerslist.asDatabaseModel())
         }
     }

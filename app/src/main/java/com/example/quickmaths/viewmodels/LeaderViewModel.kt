@@ -2,27 +2,48 @@ package com.example.quickmaths.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.quickmaths.database.getDatabase
 import com.example.quickmaths.network.NetworkPlayer
+import com.example.quickmaths.repository.PlayersRepository
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.lang.Exception
 
 class LeaderViewModel(
     application: Application
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
+    private val playersRepository = PlayersRepository(getDatabase(application))
 
+    val playerslist = playersRepository.players
 
-    private val _navigateToPlayerDetail = MutableLiveData<Long?>()
-    val navigateToPlayerDetail: MutableLiveData<Long?>
-        get() = _navigateToPlayerDetail
+    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
 
-    fun onPlayerClicked(id: Long) {
-        _navigateToPlayerDetail.value = id
+    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    val isNetworkErrorShown: LiveData<Boolean>
+        get() = _isNetworkErrorShown
+
+    init {
+        refreshDataFromRepository()
     }
 
-    fun onPlayerDetailNavigated() {
-        _navigateToPlayerDetail.value = null
+    private fun refreshDataFromRepository(){
+        viewModelScope.launch {
+            try {
+                playersRepository.refreshPlayers()
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+            } catch (networkError: IOException){
+                if(playerslist.value.isNullOrEmpty()){
+                    _eventNetworkError.value = true
+                }
+            }
+        }
     }
+
+
 
 
 

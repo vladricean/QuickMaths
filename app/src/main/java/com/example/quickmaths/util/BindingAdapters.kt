@@ -8,7 +8,7 @@ import androidx.databinding.InverseBindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.quickmaths.R
-import com.example.quickmaths.database.DatabasePlayer
+import com.example.quickmaths.domain.DomainPlayer
 
 @BindingAdapter("android:text")
 fun setText(view: TextView, value: Int) {
@@ -21,21 +21,21 @@ fun getText(view: TextView): Int {
 }
 
 @BindingAdapter("playerName")
-fun TextView.setName(item: DatabasePlayer?) {
+fun TextView.setName(item: DomainPlayer?) {
     item?.let {
         text = item.name
     }
 }
 
 @BindingAdapter("playerScoreString")
-fun TextView.setScore(item: DatabasePlayer?) {
+fun TextView.setScore(item: DomainPlayer?) {
     item?.let {
         text = item.score.toString()
     }
 }
 
 @BindingAdapter("playerImage")
-fun ImageView.setPlayerImage(item: DatabasePlayer?) {
+fun ImageView.setPlayerImage(item: DomainPlayer?) {
     item?.let {
         setImageResource(R.drawable.ic_launcher_background)
     }

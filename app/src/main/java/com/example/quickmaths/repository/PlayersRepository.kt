@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.quickmaths.database.PlayersDatabase
 import com.example.quickmaths.database.asDomaninModel
-import com.example.quickmaths.domain.DomPlayer
+import com.example.quickmaths.domain.DomainPlayer
 import com.example.quickmaths.network.DevMathNetwork
 import com.example.quickmaths.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ import timber.log.Timber
 
 class PlayersRepository(private val database: PlayersDatabase) {
 
-    val players: LiveData<List<DomPlayer>> = Transformations.map(database.playerDao.getAllPlayers()) {
+    val players: LiveData<List<DomainPlayer>> = Transformations.map(database.playerDao.getAllPlayers()) {
         it.asDomaninModel()
     }
 

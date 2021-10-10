@@ -2,7 +2,7 @@ package com.example.quickmaths.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.quickmaths.domain.DomPlayer
+import com.example.quickmaths.domain.DomainPlayer
 
 @Entity
 data class DatabasePlayer constructor(
@@ -12,9 +12,9 @@ data class DatabasePlayer constructor(
     val score: Int
 )
 
-fun List<DatabasePlayer>.asDomaninModel(): List<DomPlayer> {
+fun List<DatabasePlayer>.asDomaninModel(): List<DomainPlayer> {
     return map {
-        DomPlayer(
+        DomainPlayer(
             id = it.id,
             name = it.name,
             score = it.score

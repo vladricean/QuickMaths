@@ -1,7 +1,7 @@
 package com.example.quickmaths.network
 
 import com.example.quickmaths.database.DatabasePlayer
-import com.example.quickmaths.domain.DomPlayer
+import com.example.quickmaths.domain.DomainPlayer
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -17,9 +17,9 @@ data class NetworkPlayer(
 /**
  * Convert Network results to domain objects
  */
-fun NetworkPlayerContainer.asDomainModel(): List<DomPlayer> {
+fun NetworkPlayerContainer.asDomainModel(): List<DomainPlayer> {
     return players.map{
-        DomPlayer(
+        DomainPlayer(
             id = it.id,
             name = it.name,
             score = it.score

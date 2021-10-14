@@ -1,4 +1,4 @@
-package com.example.quickmaths.recyclers
+package com.example.quickmaths.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -9,7 +9,7 @@
             type="com.example.quickmaths.domain.DomainPlayer" />
         <variable
             name="clickListener"
-            type="com.example.quickmaths.recyclers.PlayerListener" />
+            type="com.example.quickmaths.adapters.PlayerListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

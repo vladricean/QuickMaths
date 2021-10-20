@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967656544736",
+    "project_id": "quickmaths-4200f",
+    "storage_bucket": "quickmaths-4200f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967656544736:android:5f5950f3e8653f0bc83385",
+        "android_client_info": {
+          "package_name": "com.example.quickmaths"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967656544736-5e490mqec5iu765pi9oikp34ig0lkoht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsLF4u-geNBW5sUXSMQBHjow0fqcD14eA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967656544736-5e490mqec5iu765pi9oikp34ig0lkoht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

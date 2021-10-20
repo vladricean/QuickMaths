@@ -13,6 +13,9 @@ import com.example.quickmaths.adapters.PlayerListener
 import com.example.quickmaths.adapters.PlayerStatsAdapter
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 
 class LeaderFragment : Fragment() {
@@ -20,6 +23,7 @@ class LeaderFragment : Fragment() {
     private lateinit var viewModel: LeaderViewModel
     private lateinit var binding: LeaderFragmentBinding
     private lateinit var adapter: PlayerStatsAdapter
+    val db = Firebase.firestore
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,6 +56,25 @@ class LeaderFragment : Fragment() {
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
+
+        ////////////////////////////////////////////////////////
+                             // FIREBASE
+        ////////////////////////////////////////////////////////
+
+        val user = hashMapOf(
+            "name" to "alex",
+            "score" to 30
+        )
+
+        // Add a new document with a generated ID
+        db.collection("users")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Timber.d("DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Timber.w( "Error adding document", e)
+            }
 
         return binding.root
     }

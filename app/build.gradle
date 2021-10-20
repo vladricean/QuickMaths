@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id "dagger.hilt.android.plugin"
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -50,6 +51,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.4'
 
     // Testing
     testImplementation "androidx.test.ext:junit-ktx:1.1.3"

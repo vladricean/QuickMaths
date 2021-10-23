@@ -1,6 +1,7 @@
 package com.example.quickmaths.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -74,6 +75,18 @@ class LeaderFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 Timber.w( "Error adding document", e)
+            }
+
+        // Read data from firebase
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Timber.d("${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Timber.w("Error getting documents.", exception)
             }
 
         return binding.root

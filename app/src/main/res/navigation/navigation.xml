@@ -19,6 +19,11 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInActivity"
+            app:destination="@id/signInActivity"
+            app:popUpTo="@id/signInActivity"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/playFragment"
@@ -73,4 +78,9 @@
             android:name="playerKey"
             app:argType="long" />
     </fragment>
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.example.quickmaths.SignInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
 </navigation>

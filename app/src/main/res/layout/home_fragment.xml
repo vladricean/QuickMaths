@@ -13,7 +13,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -71,17 +72,28 @@
             </androidx.appcompat.widget.AppCompatButton>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/appCompatButton3"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/button_top_margin"
-                android:layout_marginBottom="@dimen/constraint_bottom"
                 android:text="@string/quit_button"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/appCompatButton"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatButton">
 
             </androidx.appcompat.widget.AppCompatButton>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="150dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="80dp"
+                android:text="@string/btn_log_out"
+                android:onClick="@{() -> viewModel.onLogoutTapped()}"
+                app:layout_constraintEnd_toEndOf="@+id/appCompatButton3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/appCompatButton3"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TitleText"

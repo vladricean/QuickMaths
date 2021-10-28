@@ -8,12 +8,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.MainActivity
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.HomeFragmentBinding
 import com.example.quickmaths.viewmodels.HomeViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -23,12 +27,12 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: HomeFragmentBinding
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val mAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +44,21 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        val currentUser = mAuth.currentUser
+        Toast.makeText(context, "${currentUser?.uid} + ${currentUser?.displayName} + ${currentUser?.email}", Toast.LENGTH_LONG).show()
+
+        setupGSO()
         setupObservation()
 
         return binding.root
+    }
+
+    private fun setupGSO(){
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient= GoogleSignIn.getClient(requireActivity(),gso)
     }
 
     private fun setupObservation(){
@@ -65,10 +81,11 @@ class HomeFragment : Fragment() {
         })
         viewModel.onLogoutPressed().observe(viewLifecycleOwner,
         Observer {
-            Firebase.auth.signOut()
-            val navController = findNavController()
-            navController.navigate(R.id.action_homeFragment_to_signInActivity)
-            activity?.finish()
+            mGoogleSignInClient.signOut().addOnCompleteListener {
+                val navController = findNavController()
+                navController.navigate(R.id.action_homeFragment_to_signInActivity)
+                activity?.finish()
+            }
         })
     }
 

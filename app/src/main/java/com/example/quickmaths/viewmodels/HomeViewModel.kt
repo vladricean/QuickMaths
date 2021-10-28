@@ -12,6 +12,8 @@ class HomeViewModel : ViewModel() {
         SingleLiveEvent<Void>()
     private val onSettingsPressed =
         SingleLiveEvent<Void>()
+    private val onLogoutPressed =
+        SingleLiveEvent<Void>()
 
     fun onPlayPressed(): LiveData<Void> {
         return onPlayPressed
@@ -35,6 +37,14 @@ class HomeViewModel : ViewModel() {
 
     fun onSettingsTapped() {
         onSettingsPressed.call()
+    }
+
+    fun onLogoutPressed(): LiveData<Void> {
+        return onLogoutPressed
+    }
+
+    fun onLogoutTapped() {
+        onLogoutPressed.call()
     }
 
 }

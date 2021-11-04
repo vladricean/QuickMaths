@@ -14,15 +14,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
 
-    companion object{
-        private const val RC_SIGN_IN = 120
-    }
-
+    private val db = Firebase.firestore
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -58,6 +57,8 @@ class SignInActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
+
+                    addUserToFirebase()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -97,12 +98,30 @@ class SignInActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Timber.d( "signInWithCredential:success")
+
+                    addUserToFirebase()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
                     Timber.w( "signInWithCredential:failure", task.exception)
                 }
+            }
+    }
+
+    private fun addUserToFirebase() {
+        val currentUser = mAuth.currentUser
+        val user = hashMapOf(
+            "name" to currentUser!!.displayName,
+            "score" to 0
+        )
+        db.collection("users").document(currentUser.uid)
+            .set(user)
+            .addOnSuccessListener { documentReference ->
+                Timber.i("User ${currentUser.displayName} has been added to firestore")
+            }
+            .addOnFailureListener { e ->
+                Timber.w( "Error adding document", e)
             }
     }
 }

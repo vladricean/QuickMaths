@@ -24,7 +24,7 @@ class LeaderFragment : Fragment() {
     private lateinit var viewModel: LeaderViewModel
     private lateinit var binding: LeaderFragmentBinding
     private lateinit var adapter: PlayerStatsAdapter
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

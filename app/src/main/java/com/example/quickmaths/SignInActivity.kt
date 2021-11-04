@@ -1,9 +1,11 @@
 package com.example.quickmaths
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -21,6 +23,12 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            signInWithGoogle(data)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +44,12 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         btn_google.setOnClickListener {
-            signInViaGoogle()
+            createIntentSigninGoogle()
         }
         btn_anonymous.setOnClickListener {
             signInAnonymously()
         }
     }
-
-
 
     private fun signInAnonymously(){
         mAuth.signInAnonymously()
@@ -61,30 +67,25 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun signInViaGoogle() {
+    private fun createIntentSigninGoogle() {
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        resultLauncher.launch(signInIntent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val exception = task.exception
-            if(task.isSuccessful) {
-                try {
-                    // Google Sign In was successful, authenticate with Firebase
-                    val account = task.getResult(ApiException::class.java)!!
-                    Timber.d("firebaseAuthWithGoogle:" + account.id)
-                    firebaseAuthWithGoogle(account.idToken!!)
-                } catch (e: ApiException) {
-                    Timber.w("Google sign in failed", e)
-                }
-            } else {
-                Timber.w(exception.toString())
+    private fun signInWithGoogle(data: Intent?) {
+        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        val exception = task.exception
+        if(task.isSuccessful) {
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)!!
+                Timber.d("firebaseAuthWithGoogle:" + account.id)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Timber.w("Google sign in failed", e)
             }
+        } else {
+            Timber.w(exception.toString())
         }
     }
 

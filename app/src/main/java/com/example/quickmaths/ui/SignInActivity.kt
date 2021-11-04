@@ -1,4 +1,4 @@
-package com.example.quickmaths
+package com.example.quickmaths.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.quickmaths.MainActivity
+import com.example.quickmaths.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

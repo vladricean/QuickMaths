@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_in.*
@@ -81,13 +82,22 @@ class SignInActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if(document != null){
                     Timber.i("cnt: ${document.get("usrcnt")}")
-                    addUserToFirestore(document.get("usrcnt").toString())
+                    val anonymousNumber = document.get("usrcnt").toString().toInt()+1
+                    updateAnonynousNumberOnFirestore(anonymousNumber)
+                    addUserToFirestore(anonymousNumber.toString())
                 }
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.", exception)
             }
     }
+
+    private fun updateAnonynousNumberOnFirestore(anonymousNumber: Int) {
+        val data = hashMapOf("usrcnt" to anonymousNumber)
+        db.collection("extra").document("userscount")
+            .set(data, SetOptions.merge())
+    }
+
 
     private fun signInWithGoogle(data: Intent?) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -133,7 +143,6 @@ class SignInActivity : AppCompatActivity() {
             username = "Anonymous${anonymousNumber}"
         }
 
-        Timber.i("anonymousNR: ${anonymousNumber}")
         val user = hashMapOf(
             "name" to username,
             "score" to 0

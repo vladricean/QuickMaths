@@ -52,13 +52,18 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun createIntentSigninGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        resultLauncher.launch(signInIntent)
+    }
+
     private fun signInAnonymously(){
         mAuth.signInAnonymously()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
 
-                    addUserToFirebase()
+                    getNextAnonymousUserNumber()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -70,9 +75,18 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun createIntentSigninGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        resultLauncher.launch(signInIntent)
+    private fun getNextAnonymousUserNumber(){
+        db.collection("extra").document("userscount")
+            .get()
+            .addOnSuccessListener { document ->
+                if(document != null){
+                    Timber.i("cnt: ${document.get("usrcnt")}")
+                    addUserToFirestore(document.get("usrcnt").toString())
+                }
+            }
+            .addOnFailureListener { exception ->
+                Timber.w("Error getting documents.", exception)
+            }
     }
 
     private fun signInWithGoogle(data: Intent?) {
@@ -99,7 +113,7 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Timber.d( "signInWithCredential:success")
 
-                    addUserToFirebase()
+                    addUserToFirestore()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -109,13 +123,22 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
-    private fun addUserToFirebase() {
+    private fun addUserToFirestore(anonymousNumber: String = "null") {
         val currentUser = mAuth.currentUser
+        var username = ""
+
+        if(anonymousNumber.equals("null")){
+            username = currentUser!!.displayName.toString()
+        } else {
+            username = "Anonymous${anonymousNumber}"
+        }
+
+        Timber.i("anonymousNR: ${anonymousNumber}")
         val user = hashMapOf(
-            "name" to currentUser!!.displayName,
+            "name" to username,
             "score" to 0
         )
-        db.collection("users").document(currentUser.uid)
+        db.collection("users").document(currentUser!!.uid)
             .set(user)
             .addOnSuccessListener { documentReference ->
                 Timber.i("User ${currentUser.displayName} has been added to firestore")

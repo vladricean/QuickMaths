@@ -5,4 +5,9 @@
         <item name="android:textSize">30sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="CurrentUser" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#48904F</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -30,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: HomeFragmentBinding
     lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val db = Firebase.firestore
     private val mAuth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -50,8 +53,26 @@ class HomeFragment : Fragment() {
 
         setupGSO()
         setupObservation()
+        updateCurrentUserTv()
 
         return binding.root
+    }
+
+    private fun updateCurrentUserTv() {
+        val currentUser = mAuth.currentUser
+        val docRef = db.collection("users").document(currentUser!!.uid)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Timber.w( "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                Timber.d("Current data: ${snapshot.data}")
+                binding.tvCurrentUser.setText(snapshot.data?.getValue("name").toString())
+            } else {
+                Timber.d("Current data: null")
+            }
+        }
     }
 
     private fun setupGSO(){

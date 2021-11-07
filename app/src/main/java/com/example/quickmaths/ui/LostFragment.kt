@@ -16,13 +16,18 @@ import com.example.quickmaths.databinding.LostFragmentBinding
 import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.viewmodels.LostViewModel
 import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LostFragment: Fragment() {
 
     private lateinit var binding: LostFragmentBinding
     private lateinit var viewModel: LostViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +41,12 @@ class LostFragment: Fragment() {
 
         setupObservation()
         setScore()
-        getHighScoreFromSharedPref()
+//        getHighScoreFromSharedPref()
 
         return binding.root
     }
+
+
 
     private fun getHighScoreFromSharedPref() {
         val args = LostFragmentArgs.fromBundle(requireArguments())
@@ -97,7 +104,7 @@ class LostFragment: Fragment() {
             Observer { numberOfPlayers ->
                 binding.playerStats.setText(numberOfPlayers.toString())
             })
-
+        viewModel.getHighscoreFromFirestore()
     }
 
 

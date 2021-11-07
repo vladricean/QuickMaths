@@ -18,6 +18,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.coroutines.flow.merge
 import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
@@ -142,11 +143,32 @@ class SignInActivity : AppCompatActivity() {
         } else {
             username = "Anonymous${anonymousNumber}"
         }
+        checkIfUserExists(username)
+    }
 
+    private fun checkIfUserExists(username: String){
+        val currentUser = mAuth.currentUser
+        val docRef = db.collection("users").document(currentUser!!.uid)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Timber.w( "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                // Do nothing
+            } else {
+                Timber.d("Current data: null")
+                addUser(username)
+            }
+        }
+    }
+
+    private fun addUser(username: String) {
         val user = hashMapOf(
             "name" to username,
             "score" to 0
         )
+        val currentUser = mAuth.currentUser
         db.collection("users").document(currentUser!!.uid)
             .set(user)
             .addOnSuccessListener { documentReference ->
@@ -156,4 +178,6 @@ class SignInActivity : AppCompatActivity() {
                 Timber.w( "Error adding document", e)
             }
     }
+
+
 }

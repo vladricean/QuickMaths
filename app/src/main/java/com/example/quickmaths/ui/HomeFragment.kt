@@ -42,10 +42,6 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val currentUser = mAuth.currentUser
-        Toast.makeText(context, "${currentUser?.uid} + ${currentUser?.displayName} + ${currentUser?.email}", Toast.LENGTH_LONG).show()
-        Timber.i("${currentUser?.uid} + ${currentUser?.displayName} + ${currentUser?.email}")
-
         setupGSO()
         setupObservation()
         updateCurrentUserTv()

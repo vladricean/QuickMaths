@@ -20,12 +20,8 @@ class LostViewModel(
     private val onNavigateToLeaderFragment =
         SingleLiveEvent<Void>()
 
-    private val _numberOfPlayers = MutableLiveData<Int>()
-    val numberOfPlayers: LiveData<Int>
-            get() = _numberOfPlayers
     private val db = Firebase.firestore
     private val mAuth = FirebaseAuth.getInstance()
-
 
     val onNewBestScoreState = MutableLiveData(BestScoreState.DEFAULT)
     val score = MutableLiveData<Int>()

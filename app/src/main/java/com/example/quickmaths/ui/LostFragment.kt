@@ -20,7 +20,6 @@ class LostFragment: Fragment() {
     private lateinit var binding: LostFragmentBinding
     private lateinit var viewModel: LostViewModel
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,10 +51,6 @@ class LostFragment: Fragment() {
             Observer {
                 val navController = findNavController()
                 navController.navigate(LostFragmentDirections.actionLostFragmentToLeaderFragment())
-            })
-        viewModel.numberOfPlayers.observe(viewLifecycleOwner,
-            Observer { numberOfPlayers ->
-                binding.playerStats.setText(numberOfPlayers.toString())
             })
     }
 

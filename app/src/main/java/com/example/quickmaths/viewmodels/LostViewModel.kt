@@ -24,9 +24,8 @@ class LostViewModel(
     val numberOfPlayers: LiveData<Int>
             get() = _numberOfPlayers
     private val db = Firebase.firestore
-    private val mAuth by lazy {
-        FirebaseAuth.getInstance()
-    }
+    private val mAuth = FirebaseAuth.getInstance()
+
 
     val onNewBestScoreState = MutableLiveData(BestScoreState.DEFAULT)
     val score = MutableLiveData<Int>()
@@ -34,6 +33,7 @@ class LostViewModel(
 
     init {
         onNewBestScoreState.value = BestScoreState.DEFAULT
+        getHighscoreFromFirestore()
     }
 
     fun getHighscoreFromFirestore() {

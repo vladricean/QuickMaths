@@ -23,9 +23,8 @@ class PlayViewModel() : ViewModel() {
     }
 
     private val db = Firebase.firestore
-    private val mAuth by lazy {
-        FirebaseAuth.getInstance()
-    }
+    private val mAuth = FirebaseAuth.getInstance()
+
     private var firstNumber = 0
     private var secondNumber = 0
     private var answer = 0

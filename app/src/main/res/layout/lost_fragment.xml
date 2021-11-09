@@ -125,29 +125,6 @@
 
             </androidx.appcompat.widget.AppCompatButton>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_add_player"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/constraint_top"
-                android:text="ADD PLAYER"
-                app:layout_constraintEnd_toEndOf="@+id/btn_view_leaderboard"
-                app:layout_constraintStart_toStartOf="@+id/btn_view_leaderboard"
-                app:layout_constraintTop_toBottomOf="@+id/btn_view_leaderboard" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/playerStats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/constraint_top"
-                android:layout_marginBottom="16dp"
-                android:singleLine="false"
-                android:text="Player stats"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/btn_add_player"
-                app:layout_constraintStart_toStartOf="@+id/btn_add_player"
-                app:layout_constraintTop_toBottomOf="@+id/btn_add_player" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_highest_score"
                 android:layout_width="wrap_content"
@@ -174,6 +151,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </layout>

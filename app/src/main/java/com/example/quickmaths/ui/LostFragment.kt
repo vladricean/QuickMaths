@@ -57,7 +57,6 @@ class LostFragment: Fragment() {
             Observer { numberOfPlayers ->
                 binding.playerStats.setText(numberOfPlayers.toString())
             })
-        viewModel.getHighscoreFromFirestore()
     }
 
 

@@ -34,6 +34,7 @@ class LostViewModel(
 
     init {
         onNewBestScoreState.value = BestScoreState.DEFAULT
+        getHighscoreFromFirestore()
     }
 
     fun getHighscoreFromFirestore() {

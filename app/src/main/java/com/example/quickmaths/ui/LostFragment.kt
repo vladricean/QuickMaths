@@ -1,6 +1,5 @@
 package com.example.quickmaths.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,16 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.R
-import com.example.quickmaths.database.PlayersDatabase
 import com.example.quickmaths.databinding.LostFragmentBinding
-import com.example.quickmaths.enums.BestScoreState
 import com.example.quickmaths.viewmodels.LostViewModel
-import com.example.quickmaths.viewmodelsfactory.LostViewModelFactory
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class LostFragment: Fragment() {
@@ -41,47 +33,8 @@ class LostFragment: Fragment() {
 
         setupObservation()
         setScore()
-//        getHighScoreFromSharedPref()
 
         return binding.root
-    }
-
-
-
-    private fun getHighScoreFromSharedPref() {
-        val args = LostFragmentArgs.fromBundle(requireArguments())
-        val sharedPref = activity?.getSharedPreferences(
-            getString(R.string.preference_file_key),
-            Context.MODE_PRIVATE
-        )
-        if (sharedPref != null) {
-            val defaultValue = resources.getInteger(R.integer.saved_high_score_default_key)
-
-            if (sharedPref.getInt(
-                    getString(R.string.saved_high_score_key),
-                    defaultValue
-                ) < args.numPoints
-            ) {
-                setNewBestScoreState()
-
-                sharedPref.edit()
-                    .putInt(getString(R.string.saved_high_score_key), args.numPoints)
-                    .apply()
-            }
-
-            val highScore =
-                sharedPref?.getInt(getString(R.string.saved_high_score_key), defaultValue)
-
-            setHighScore(highScore)
-        }
-    }
-
-    private fun setNewBestScoreState(){
-        viewModel.onNewBestScoreState.value = BestScoreState.NEW_BEST_SCORE
-    }
-
-    private fun setHighScore(highScore: Int) {
-        viewModel.highScore.value = highScore
     }
 
     private fun setScore() {

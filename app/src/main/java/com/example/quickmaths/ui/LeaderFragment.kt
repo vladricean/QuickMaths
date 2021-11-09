@@ -26,16 +26,6 @@ class LeaderFragment : Fragment() {
     private lateinit var adapter: PlayerStatsAdapter
     private val db = Firebase.firestore
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.playerslist.observe(viewLifecycleOwner,
-            Observer {
-                it?.let {
-                    adapter.submitList(it)
-                }
-            })
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

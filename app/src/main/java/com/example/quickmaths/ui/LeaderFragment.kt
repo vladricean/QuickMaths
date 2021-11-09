@@ -14,6 +14,7 @@ import com.example.quickmaths.adapters.PlayerListener
 import com.example.quickmaths.adapters.PlayerStatsAdapter
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
@@ -24,7 +25,7 @@ class LeaderFragment : Fragment() {
     private lateinit var viewModel: LeaderViewModel
     private lateinit var binding: LeaderFragmentBinding
     private lateinit var adapter: PlayerStatsAdapter
-    private val db = Firebase.firestore
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,8 @@ class LeaderFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(LeaderViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        db = Firebase.firestore
 
         adapter = PlayerStatsAdapter(PlayerListener { playerId ->
             Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()

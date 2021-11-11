@@ -22,9 +22,6 @@ class PlayViewModel() : ViewModel() {
         private const val COUNTDOWN_TIME = 2500L
     }
 
-    private val db = Firebase.firestore
-    private val mAuth = FirebaseAuth.getInstance()
-
     private var firstNumber = 0
     private var secondNumber = 0
     private var answer = 0

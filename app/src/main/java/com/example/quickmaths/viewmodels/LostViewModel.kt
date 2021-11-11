@@ -29,7 +29,36 @@ class LostViewModel(
 
     init {
         onNewBestScoreState.value = BestScoreState.DEFAULT
-        getHighscoreFromFirestore()
+        checkFirestoreScore()
+    }
+
+    private fun checkFirestoreScore() {
+        val currentUser = mAuth.currentUser
+        val docRef = db.collection("users").document(currentUser!!.uid)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Timber.w( "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                Timber.d("Current data: ${snapshot.data}")
+                val firestoreScore = snapshot.data?.getValue("score")
+                if(firestoreScore.toString().toInt() < score.value!!) {
+                    onNewBestScoreState.value = BestScoreState.NEW_BEST_SCORE
+                    updateFirestoreScore(score.value!!)
+                    highScore.value = score.value
+                } else{
+                    getHighscoreFromFirestore()
+                }
+            } else {
+                Timber.d("Current data: null")
+            }
+        }
+    }
+
+    private fun updateFirestoreScore(score: Int) {
+        db.collection("users").document(mAuth.currentUser!!.uid)
+            .update("score", score)
     }
 
     fun getHighscoreFromFirestore() {
@@ -69,6 +98,5 @@ class LostViewModel(
     fun onViewLeaderboardPressed() {
         onNavigateToLeaderFragment.call()
     }
-
 
 }

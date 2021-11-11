@@ -91,32 +91,6 @@ class PlayViewModel() : ViewModel() {
 
     private fun onLost() {
         _getScoreAndNavigateToLost.value = _score.value
-        checkFirestoreScore()
-    }
-
-    private fun checkFirestoreScore() {
-        val currentUser = mAuth.currentUser
-        val docRef = db.collection("users").document(currentUser!!.uid)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Timber.w( "Listen failed.", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                Timber.d("Current data: ${snapshot.data}")
-                val firestoreScore = snapshot.data?.getValue("score")
-                if(firestoreScore.toString().toInt() < _score.value!!) {
-                    updateFirestoreScore(_score.value!!)
-                }
-            } else {
-                Timber.d("Current data: null")
-            }
-        }
-    }
-
-    private fun updateFirestoreScore(score: Int) {
-        db.collection("users").document(mAuth.currentUser!!.uid)
-            .update("score", score)
     }
 
     fun onClickNumber(number: Int) {

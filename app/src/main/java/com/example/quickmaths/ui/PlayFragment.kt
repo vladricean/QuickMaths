@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.quickmaths.BaseApplication.Companion.prefs
 import com.example.quickmaths.databinding.PlayFragmentBinding
 import com.example.quickmaths.viewmodels.PlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class PlayFragment : Fragment() {
@@ -33,6 +35,12 @@ class PlayFragment : Fragment() {
         binding.lifecycleOwner = this
 
         setupObservation()
+
+        prefs?.intExamplePref = 10
+        Timber.i("examplePref: ${prefs?.intExamplePref}")
+
+        prefs?.intExamplePref = 11
+        Timber.i("examplePref: ${prefs?.intExamplePref}")
 
         return binding.root
     }

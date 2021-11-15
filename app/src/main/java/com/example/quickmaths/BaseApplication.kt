@@ -1,25 +1,26 @@
 package com.example.quickmaths
 
 import android.app.Application
-import com.example.quickmaths.services.QuickMathsSharedPreferences
+import com.example.quickmaths.services.QuickMathsEncryptedSharedPreferences
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-val prefs: QuickMathsSharedPreferences by lazy {
-    BaseApplication.prefs!!
+val encryptedPrefs: QuickMathsEncryptedSharedPreferences by lazy {
+    BaseApplication.encryptedPrefs!!
 }
 
 @HiltAndroidApp
 class BaseApplication : Application() {
 
     companion object {
-        var prefs: QuickMathsSharedPreferences? = null
+        var encryptedPrefs: QuickMathsEncryptedSharedPreferences? = null
         lateinit var instance: BaseApplication
             private set
     }
+
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
@@ -28,7 +29,7 @@ class BaseApplication : Application() {
         delayedInit()
 
         instance = this
-        prefs = QuickMathsSharedPreferences(applicationContext)
+        encryptedPrefs = QuickMathsEncryptedSharedPreferences(applicationContext)
     }
 
     private fun delayedInit(){

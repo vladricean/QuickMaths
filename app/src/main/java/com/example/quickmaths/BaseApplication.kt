@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-val encryptedPrefs: QuickMathsEncryptedSharedPreferences by lazy {
+val sharedEncryptedPrefs: QuickMathsEncryptedSharedPreferences by lazy {
     BaseApplication.encryptedPrefs!!
 }
 

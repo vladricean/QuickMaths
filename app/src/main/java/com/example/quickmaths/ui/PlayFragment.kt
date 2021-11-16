@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.quickmaths.databinding.PlayFragmentBinding
-import com.example.quickmaths.encryptedPrefs
+import com.example.quickmaths.sharedEncryptedPrefs
 import com.example.quickmaths.viewmodels.PlayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -36,14 +36,14 @@ class PlayFragment : Fragment() {
 
         setupObservation()
 
-        encryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", true)
+        sharedEncryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", true)
             .apply()
-        var value = encryptedPrefs.sharedPreferences.getBoolean("someBoolean",false)
+        var value = sharedEncryptedPrefs.sharedPreferences.getBoolean("someBoolean",false)
         Timber.i("someBoolean: ${value}")
 
-        encryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", false)
+        sharedEncryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", false)
             .apply()
-        value = encryptedPrefs.sharedPreferences.getBoolean("someBoolean",true)
+        value = sharedEncryptedPrefs.sharedPreferences.getBoolean("someBoolean",true)
         Timber.i("someBoolean: ${value}")
 
         return binding.root

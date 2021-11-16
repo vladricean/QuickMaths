@@ -36,16 +36,6 @@ class PlayFragment : Fragment() {
 
         setupObservation()
 
-        sharedEncryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", true)
-            .apply()
-        var value = sharedEncryptedPrefs.sharedPreferences.getBoolean("someBoolean",false)
-        Timber.i("someBoolean: ${value}")
-
-        sharedEncryptedPrefs.sharedPreferences.edit().putBoolean("someBoolean", false)
-            .apply()
-        value = sharedEncryptedPrefs.sharedPreferences.getBoolean("someBoolean",true)
-        Timber.i("someBoolean: ${value}")
-
         return binding.root
     }
 

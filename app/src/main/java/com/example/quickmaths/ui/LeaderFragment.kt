@@ -38,11 +38,11 @@ class LeaderFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         db = Firebase.firestore
-        binding.playersList.adapter = adapter
 
         setupObservation()
         setupOnClickItem()
         getPlayersListFromFirestore()
+        binding.playersList.adapter = adapter
 
         return binding.root
     }

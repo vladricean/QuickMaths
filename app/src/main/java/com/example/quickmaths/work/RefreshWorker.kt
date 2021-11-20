@@ -12,6 +12,10 @@ import java.lang.Error
 class RefreshWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
 
+    companion object {
+        const val WORK_NAME = "com.example.quickmaths.work.RefreshWorker"
+    }
+
     override suspend fun doWork(): Result {
         try {
             refreshPlayers()
@@ -26,9 +30,10 @@ class RefreshWorker(appContext: Context, params: WorkerParameters) :
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
-                for (document in result) {
-                    Timber.i("${document.id} => ${document.data}")
-                }
+                Timber.i("The local cache is refreshed!")//
+//             for (document in result) {
+//                    Timber.i("${document.id} => ${document.data}")
+//                }
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.", exception)

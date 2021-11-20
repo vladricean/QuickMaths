@@ -20,7 +20,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
 
-
 class LeaderFragment : Fragment() {
 
     private lateinit var viewModel: LeaderViewModel
@@ -38,58 +37,48 @@ class LeaderFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(LeaderViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
         db = Firebase.firestore
-
-        adapter = PlayerStatsAdapter(PlayerListener { playerId ->
-            Toast.makeText(context, "${playerId}", Toast.LENGTH_LONG).show()
-            viewModel.onPlayerClicked(playerId)
-        })
-
         binding.playersList.adapter = adapter
 
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        })
+        setupObservation()
+        setupOnClickItem()
+        getPlayersListFromFirestore()
 
-        ////////////////////////////////////////////////////////
-                             // FIREBASE
-        ////////////////////////////////////////////////////////
+        return binding.root
+    }
 
-//        val user = hashMapOf(
-//            "name" to "alex",
-//            "score" to 30
-//        )
-//
-//        // Add a new document with a generated ID
-//        db.collection("users")
-//            .add(user)
-//            .addOnSuccessListener { documentReference ->
-//                Timber.d("DocumentSnapshot added with ID: ${documentReference.id}")
-//            }
-//            .addOnFailureListener { e ->
-//                Timber.w( "Error adding document", e)
-//            }
-
-        // Read data from firebase
+    private fun getPlayersListFromFirestore() {
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
                 val playersList = mutableListOf<DomainPlayer>()
                 for (document in result) {
                     Timber.i("${document.id} => ${document.data}")
-                    playersList.add(DomainPlayer(
-                        document.id,
-                        document.data.getValue("name").toString(),
-                        document.data.getValue("score").toString().toInt()))
+                    playersList.add(
+                        DomainPlayer(
+                            document.id,
+                            document.data.getValue("name").toString(),
+                            document.data.getValue("score").toString().toInt()
+                        )
+                    )
                 }
                 adapter.submitList(playersList)
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.", exception)
             }
+    }
 
-        return binding.root
+    private fun setupOnClickItem() {
+        adapter = PlayerStatsAdapter(PlayerListener { playerId ->
+            Toast.makeText(context, playerId, Toast.LENGTH_LONG).show()
+            viewModel.onPlayerClicked(playerId)
+        })    }
+
+    private fun setupObservation(){
+        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        })
     }
 
     private fun onNetworkError() {

@@ -46,10 +46,7 @@ class LeaderFragment : Fragment() {
             viewModel.onPlayerClicked(playerId)
         })
 
-        val playersList = listOf<DomainPlayer>(DomainPlayer(1,"abc",10), DomainPlayer(2,"cdf",20))
         binding.playersList.adapter = adapter
-
-        adapter.submitList(playersList)
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
@@ -59,28 +56,32 @@ class LeaderFragment : Fragment() {
                              // FIREBASE
         ////////////////////////////////////////////////////////
 
-        val user = hashMapOf(
-            "name" to "alex",
-            "score" to 30
-        )
-
-        // Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Timber.d("DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Timber.w( "Error adding document", e)
-            }
+//        val user = hashMapOf(
+//            "name" to "alex",
+//            "score" to 30
+//        )
+//
+//        // Add a new document with a generated ID
+//        db.collection("users")
+//            .add(user)
+//            .addOnSuccessListener { documentReference ->
+//                Timber.d("DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//                Timber.w( "Error adding document", e)
+//            }
 
         // Read data from firebase
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
+                val playersList = mutableListOf<DomainPlayer>()
+                var id: Long = 1
                 for (document in result) {
-                    Timber.d("${document.id} => ${document.data}")
+                    Timber.i("${document.id} => ${document.data}")
+                    playersList.add(DomainPlayer(id++, document.data.getValue("name").toString(), document.data.getValue("score").toString().toInt()))
                 }
+                adapter.submitList(playersList)
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.", exception)

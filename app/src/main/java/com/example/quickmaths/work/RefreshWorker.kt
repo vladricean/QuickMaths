@@ -7,7 +7,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
-import java.lang.Error
 
 class RefreshWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
@@ -30,10 +29,7 @@ class RefreshWorker(appContext: Context, params: WorkerParameters) :
         db.collection("users")
             .get()
             .addOnSuccessListener { result ->
-                Timber.i("The local cache is refreshed!")//
-//             for (document in result) {
-//                    Timber.i("${document.id} => ${document.data}")
-//                }
+                Timber.i("The local cache is refreshed!")
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents.", exception)

@@ -51,7 +51,7 @@ class BaseApplication : Application() {
             .setRequiresDeviceIdle(true)
             .build()
 
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshWorker>(15, TimeUnit.MINUTES)
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshWorker>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
 

@@ -76,10 +76,12 @@ class LeaderFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 val playersList = mutableListOf<DomainPlayer>()
-                var id: Long = 1
                 for (document in result) {
                     Timber.i("${document.id} => ${document.data}")
-                    playersList.add(DomainPlayer(id++, document.data.getValue("name").toString(), document.data.getValue("score").toString().toInt()))
+                    playersList.add(DomainPlayer(
+                        document.id,
+                        document.data.getValue("name").toString(),
+                        document.data.getValue("score").toString().toInt()))
                 }
                 adapter.submitList(playersList)
             }

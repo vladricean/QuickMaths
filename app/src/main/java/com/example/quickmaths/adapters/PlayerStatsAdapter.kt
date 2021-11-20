@@ -47,6 +47,6 @@ class PlayerDiffCallback : DiffUtil.ItemCallback<DomainPlayer>() {
     }
 }
 
-class PlayerListener(val clickListener: (playerId: Long) -> Unit) {
+class PlayerListener(val clickListener: (playerId: String) -> Unit) {
     fun onClick(player: DomainPlayer) = clickListener(player.id)
 }

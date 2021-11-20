@@ -16,11 +16,11 @@ class LeaderViewModel(
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private val _navigateToPlayerDetail = MutableLiveData<Long>()
-    val navigateToPlayerDetail: LiveData<Long>
+    private val _navigateToPlayerDetail = MutableLiveData<String>()
+    val navigateToPlayerDetail: LiveData<String>
         get() = _navigateToPlayerDetail
 
-    fun onPlayerClicked(id: Long){
+    fun onPlayerClicked(id: String){
         _navigateToPlayerDetail.value = id
     }
 

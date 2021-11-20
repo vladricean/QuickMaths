@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quickmaths.databinding.LeaderFragmentBinding
 import com.example.quickmaths.adapters.PlayerListener
 import com.example.quickmaths.adapters.PlayerStatsAdapter
+import com.example.quickmaths.domain.DomainPlayer
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,7 +46,10 @@ class LeaderFragment : Fragment() {
             viewModel.onPlayerClicked(playerId)
         })
 
+        val playersList = listOf<DomainPlayer>(DomainPlayer(1,"abc",10), DomainPlayer(2,"cdf",20))
         binding.playersList.adapter = adapter
+
+        adapter.submitList(playersList)
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()

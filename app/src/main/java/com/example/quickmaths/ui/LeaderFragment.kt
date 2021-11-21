@@ -51,8 +51,19 @@ class LeaderFragment : Fragment() {
         viewModel.playersList.observe(viewLifecycleOwner,
         Observer { playersList ->
             adapter.submitList(playersList)
+//            val position = playersList.indexOf(getCurrentPlayer())
+//            Timber.i("position: ${position}")
+//            binding.playersList.scrollToPosition(position)
         })
     }
+
+//    private fun getCurrentPlayer(): DomainPlayer{
+//        val currentPlayer = DomainPlayer(
+//
+//        )
+//        Timber.i("currentPlayer: ${currentPlayer}")
+//        return currentPlayer
+//    }
 
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {

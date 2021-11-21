@@ -11,7 +11,7 @@ class QuickMathsEncryptedSharedPreferences (context: Context){
         .build()
 
 
-    val sharedPreferences = EncryptedSharedPreferences.create(context,
+    val instance = EncryptedSharedPreferences.create(context,
         "PreferencesFilename",
         masterKey,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,

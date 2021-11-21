@@ -11,20 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quickmaths.adapters.PlayerListener
 import com.example.quickmaths.adapters.PlayerStatsAdapter
 import com.example.quickmaths.databinding.LeaderFragmentBinding
-import com.example.quickmaths.domain.DomainPlayer
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import timber.log.Timber
 
 class LeaderFragment : Fragment() {
 
     private lateinit var viewModel: LeaderViewModel
     private lateinit var binding: LeaderFragmentBinding
     private lateinit var adapter: PlayerStatsAdapter
-    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,36 +30,12 @@ class LeaderFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(LeaderViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        db = Firebase.firestore
 
         setupObservation()
         setupOnClickItem()
-        getPlayersListFromFirestore()
         binding.playersList.adapter = adapter
 
         return binding.root
-    }
-
-    private fun getPlayersListFromFirestore() {
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { result ->
-                val playersList = mutableListOf<DomainPlayer>()
-                for (document in result) {
-                    Timber.i("${document.id} => ${document.data}")
-                    playersList.add(
-                        DomainPlayer(
-                            document.id,
-                            document.data.getValue("name").toString(),
-                            document.data.getValue("score").toString().toInt()
-                        )
-                    )
-                }
-                adapter.submitList(playersList)
-            }
-            .addOnFailureListener { exception ->
-                Timber.w("Error getting documents.", exception)
-            }
     }
 
     private fun setupOnClickItem() {
@@ -77,6 +47,10 @@ class LeaderFragment : Fragment() {
     private fun setupObservation(){
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
+        })
+        viewModel.playersList.observe(viewLifecycleOwner,
+        Observer { playersList ->
+            adapter.submitList(playersList)
         })
     }
 

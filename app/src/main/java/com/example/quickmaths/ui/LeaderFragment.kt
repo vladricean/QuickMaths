@@ -60,7 +60,4 @@ class LeaderFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
-
-
 }

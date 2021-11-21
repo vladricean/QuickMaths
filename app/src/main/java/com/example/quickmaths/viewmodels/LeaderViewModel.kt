@@ -50,6 +50,9 @@ class LeaderViewModel(
                             document.data.getValue("score").toString().toInt()
                         )
                     )
+                    players.sortByDescending {
+                        it.score
+                    }
                     _playersList.value = players
                 }
             }

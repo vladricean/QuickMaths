@@ -11,14 +11,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quickmaths.adapters.PlayerListener
 import com.example.quickmaths.adapters.PlayerStatsAdapter
 import com.example.quickmaths.databinding.LeaderFragmentBinding
+import com.example.quickmaths.domain.DomainPlayer
 import com.example.quickmaths.viewmodels.LeaderViewModel
 import com.example.quickmaths.viewmodelsfactory.LeaderViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 class LeaderFragment : Fragment() {
 
     private lateinit var viewModel: LeaderViewModel
     private lateinit var binding: LeaderFragmentBinding
     private lateinit var adapter: PlayerStatsAdapter
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +38,9 @@ class LeaderFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(LeaderViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        mAuth = FirebaseAuth.getInstance()
+        db = Firebase.firestore
 
         setupObservation()
         setupOnClickItem()
@@ -51,19 +62,32 @@ class LeaderFragment : Fragment() {
         viewModel.playersList.observe(viewLifecycleOwner,
         Observer { playersList ->
             adapter.submitList(playersList)
-//            val position = playersList.indexOf(getCurrentPlayer())
-//            Timber.i("position: ${position}")
-//            binding.playersList.scrollToPosition(position)
+            scrollRecylerViewToCurrentPlayerPosition(playersList)
         })
     }
 
-//    private fun getCurrentPlayer(): DomainPlayer{
-//        val currentPlayer = DomainPlayer(
-//
-//        )
-//        Timber.i("currentPlayer: ${currentPlayer}")
-//        return currentPlayer
-//    }
+    private fun scrollRecylerViewToCurrentPlayerPosition(playersList: List<DomainPlayer>) {
+        val currentUser = mAuth.currentUser
+        val docRef = db.collection("users").document(currentUser!!.uid)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Timber.w( "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                Timber.d("Current data: ${snapshot.data}")
+                val currentPlayer = DomainPlayer(
+                    currentUser.uid,
+                    snapshot.data?.get("name").toString(),
+                    snapshot.data?.get("score").toString().toInt()
+                )
+                val position = playersList.indexOf(currentPlayer) + 3 // +3 to be centered
+                binding.playersList.scrollToPosition(position)
+            } else {
+                Timber.d("Current data: null")
+            }
+        }
+    }
 
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {

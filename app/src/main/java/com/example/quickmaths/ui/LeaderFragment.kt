@@ -52,6 +52,10 @@ class LeaderFragment : Fragment() {
         Observer { playersList ->
             adapter.submitList(playersList)
         })
+        viewModel.startPosition.observe(viewLifecycleOwner,
+        Observer { startPosition ->
+            binding.playersList.scrollToPosition(startPosition)
+        })
     }
 
     private fun onNetworkError() {
@@ -60,7 +64,4 @@ class LeaderFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
-
-
 }

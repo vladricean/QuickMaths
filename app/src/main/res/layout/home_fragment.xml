@@ -77,6 +77,7 @@
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/button_top_margin"
                 android:text="@string/quit_button"
+                android:onClick="@{() -> viewModel.onQuitTapped()}"
                 app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/appCompatButton"

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.quickmaths.BaseApplication
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.HomeFragmentBinding
 import com.example.quickmaths.viewmodels.HomeViewModel
@@ -101,6 +102,10 @@ class HomeFragment : Fragment() {
                 navController.navigate(R.id.action_homeFragment_to_signInActivity)
                 activity?.finish()
             }
+        })
+        viewModel.onQuitPressed().observe(viewLifecycleOwner,
+        Observer {
+            requireActivity().finishAffinity()
         })
     }
 

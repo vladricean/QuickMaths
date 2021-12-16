@@ -11,8 +11,8 @@
     <dimen name="constraint_end">16dp</dimen>
     <dimen name="tv_play_dim">30sp</dimen>
     <dimen name="number_size">24sp</dimen>
-    <dimen name="number_width">90dp</dimen>
-    <dimen name="number_height">60dp</dimen>
+    <dimen name="btn_number_width">90dp</dimen>
+    <dimen name="btn_number_height">60dp</dimen>
     <dimen name="backspace_text_size">10sp</dimen>
     <dimen name="margin_top_big">36dp</dimen>
     <dimen name="constraint_bottom">16dp</dimen>

@@ -118,8 +118,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_one"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:layout_marginEnd="@dimen/margin_number_big"
                 android:onClick="@{() -> viewModel.onClickNumber(1)}"
@@ -132,8 +132,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_two"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(2)}"
                 android:text="@string/number_two"
@@ -146,8 +146,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_three"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginStart="@dimen/margin_number_big"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(3)}"
@@ -160,8 +160,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_four"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(4)}"
                 android:text="@string/number_four"
@@ -174,8 +174,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_five"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(5)}"
                 android:text="@string/number_five"
@@ -189,8 +189,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_six"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(6)}"
                 android:text="@string/number_six"
@@ -203,8 +203,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_seven"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(7)}"
                 android:text="@string/number_seven"
@@ -217,8 +217,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_eight"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(8)}"
                 android:text="@string/number_eight"
@@ -231,8 +231,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_nine"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:onClick="@{() -> viewModel.onClickNumber(9)}"
                 android:text="@string/number_nine"
@@ -246,7 +246,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_zero"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/number_height"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:layout_marginBottom="@dimen/constraint_bottom"
                 android:onClick="@{() -> viewModel.onClickNumber(0)}"
@@ -261,16 +261,16 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/appCompatButton2"
-                android:layout_width="@dimen/number_width"
-                android:layout_height="@dimen/number_height"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
                 android:layout_marginTop="@dimen/constraint_top"
                 android:layout_marginBottom="@dimen/constraint_bottom"
                 android:onClick="@{() -> viewModel.onClickNumber(-1)}"
                 android:text="@string/delete_button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/btn_nine"
-                app:layout_constraintStart_toStartOf="@+id/btn_nine"
-                app:layout_constraintTop_toBottomOf="@+id/btn_nine" />
+                app:layout_constraintEnd_toEndOf="@id/btn_seven"
+                app:layout_constraintStart_toStartOf="@id/btn_seven"
+                app:layout_constraintTop_toBottomOf="@id/btn_seven" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -310,6 +310,19 @@
                 app:layout_constraintTop_toTopOf="@+id/guidelineTop">
 
             </androidx.appcompat.widget.AppCompatTextView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_backspace"
+                android:layout_width="@dimen/btn_number_width"
+                android:layout_height="@dimen/btn_number_height"
+                android:layout_marginTop="@dimen/constraint_top"
+                android:layout_marginBottom="@dimen/constraint_bottom"
+                android:onClick="@{() -> viewModel.onClickBackspace()}"
+                app:icon="@drawable/icons8_left_50"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btn_nine"
+                app:layout_constraintStart_toStartOf="@+id/btn_nine"
+                app:layout_constraintTop_toBottomOf="@+id/btn_nine" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

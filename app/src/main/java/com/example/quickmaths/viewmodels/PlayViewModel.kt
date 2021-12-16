@@ -101,4 +101,8 @@ class PlayViewModel() : ViewModel() {
         checkUserAnswer()
     }
 
+    fun onClickBackspace(){
+        userAnswer.value = userAnswer.value?.div(10)
+    }
+
 }

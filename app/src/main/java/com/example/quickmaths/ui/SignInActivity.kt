@@ -113,25 +113,9 @@ class SignInActivity : AppCompatActivity() {
             if (snapshot != null && snapshot.exists()) {
                 // do nothing
             } else {
-               lastCheckIfUsernameExists(username)
+               addFreshUser(username)
             }
         }
-    }
-
-    private fun lastCheckIfUsernameExists(username: String?) {
-        db.collection("users")
-            .whereEqualTo("name", username)
-            .get()
-            .addOnSuccessListener { documents ->
-                if(documents.isEmpty){
-                    addFreshUser(username)
-                }else{
-                    btn_confirm.setEnabled(true)
-                }
-            }
-            .addOnFailureListener{ exception ->
-                Timber.w("Error getting documents: ${exception}")
-            }
     }
 
     private fun addFreshUser(username: String?) {

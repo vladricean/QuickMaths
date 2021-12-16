@@ -33,15 +33,8 @@ class SignInActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         db = Firebase.firestore
 
-        setupOnClickListeners()
+        signInAnonymously()
     }
-
-    private fun setupOnClickListeners() {
-        btn_anonymous.setOnClickListener {
-            signInAnonymously()
-        }
-    }
-
 
     private fun signInAnonymously() {
         mAuth.signInAnonymously()
@@ -69,7 +62,6 @@ class SignInActivity : AppCompatActivity() {
                 if (document != null) {
                     Timber.i("cnt: ${document.get("usrcnt")}")
                     val anonymousNumber = document.get("usrcnt").toString().toInt() + 1
-                    updateAnonynousNumberOnFirestore(anonymousNumber)
                     addAnonymousUserToFirestore(anonymousNumber.toString())
                 }
             }
@@ -96,12 +88,12 @@ class SignInActivity : AppCompatActivity() {
             if (snapshot != null && snapshot.exists()) {
                 // Do nothing
             } else {
-                checkIfUserExists(username)
+                checkIfUserExists(username, anonymousNumber)
             }
         }
     }
 
-    private fun checkIfUserExists(username: String) {
+    private fun checkIfUserExists(username: String, anonymousNumber: String) {
         val currentUser = mAuth.currentUser
         val docRef = db.collection("users").document(currentUser!!.uid)
         docRef.addSnapshotListener { snapshot, e ->
@@ -112,12 +104,12 @@ class SignInActivity : AppCompatActivity() {
             if (snapshot != null && snapshot.exists()) {
                 // Do nothing
             } else {
-                addFreshUser(username)
+                addFreshUser(username, anonymousNumber)
             }
         }
     }
 
-    private fun addFreshUser(username: String) {
+    private fun addFreshUser(username: String, anonymousNumber: String) {
         val user = hashMapOf(
             "name" to username,
             "score" to 0
@@ -127,6 +119,7 @@ class SignInActivity : AppCompatActivity() {
             .set(user)
             .addOnSuccessListener { documentReference ->
                 Timber.i("User ${currentUser.displayName} has been added to firestore")
+                updateAnonynousNumberOnFirestore(anonymousNumber.toInt())
             }
             .addOnFailureListener { e ->
                 Timber.w("Error adding document", e)

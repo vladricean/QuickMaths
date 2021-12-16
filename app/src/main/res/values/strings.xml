@@ -39,5 +39,7 @@
     <string name="btn_sign_in_with_google">Sign in With Google</string>
     <string name="btn_sign_in_anonymous">Sign in As Anonymous</string>
     <string name="btn_log_out">Log out</string>
+    <string name="et_nickname">Nickname..</string>
+    <string name="btn_confirm">CONFIRM</string>
 
 </resources>

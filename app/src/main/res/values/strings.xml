@@ -26,7 +26,7 @@
     <string name="home_tv">HOME</string>
     <string name="you_lost">YOU LOST</string>
     <string name="you_scored">You scored</string>
-    <string name="try_again">Try again</string>
+    <string name="play_again">Play again</string>
     <string name="view_leaderboard">View leaderboard</string>
     <string name="new_best_score">New Best Score!</string>
     <string name="leader_fragment">Leader Fragment</string>

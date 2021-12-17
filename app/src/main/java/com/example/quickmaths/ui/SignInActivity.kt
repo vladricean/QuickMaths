@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewTreeLifecycleOwner
 import com.example.quickmaths.MainActivity
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.ActivitySignInBinding
+import com.example.quickmaths.enums.ConfirmButtonState
 import com.example.quickmaths.viewmodels.SignInViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,43 +46,13 @@ class SignInActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel.editedText.observe(this,
         Observer { username ->
-            setupConfirmButtonState(username)
+            viewModel.setupConfirmButtonState(username)
         })
         viewModel.onConfirmPressed().observe(this,
         Observer {
             btn_confirm.setEnabled(false)
             checkIfUsernameExists(viewModel.editedText.value)
         })
-    }
-
-    private fun setupConfirmButtonState(username: String?) {
-        if(usernameIsValid(username)) {
-            db.collection("users")
-                .whereEqualTo("name", username)
-                .get()
-                .addOnSuccessListener { documents ->
-                    if (documents.isEmpty) {
-                        btn_confirm.setEnabled(true)
-                    } else {
-                        btn_confirm.setEnabled(false)
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Timber.w("Error getting documents: ${exception}")
-                }
-        } else{
-            btn_confirm.setEnabled(false)
-        }
-    }
-
-    private fun usernameIsValid(username: String?): Boolean {
-        if(username?.length ?: 0 < 3) {
-            return false
-        }
-        if(username.isNullOrEmpty()){
-            return false
-        }
-        return true
     }
 
     private fun checkIfUsernameExists(username: String?) {

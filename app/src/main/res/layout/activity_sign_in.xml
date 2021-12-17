@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.example.quickmaths.viewmodels.SignInViewModel" />
+        <variable
+            name="confirmConstant"
+            type="com.example.quickmaths.enums.ConfirmButtonState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +39,7 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/btn_number_height"
             android:layout_marginTop="@dimen/margin_top_big"
-            android:enabled="false"
+            android:enabled="@{viewModel.confirmButtonState == confirmConstant.ENABLED ? true : false}"
             android:onClickDebounce="@{() -> viewModel.onConfirmTapped()}"
             android:text="@string/btn_confirm"
             app:layout_constraintEnd_toEndOf="@id/et_choose_name"

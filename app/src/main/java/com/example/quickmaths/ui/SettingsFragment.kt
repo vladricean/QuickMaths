@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -36,6 +37,10 @@ class SettingsFragment: Fragment() {
         Timber.i(randomString)
 
         setHasOptionsMenu(true)
+
+        binding.switchAddition.setOnCheckedChangeListener{ _, isChecked ->
+            Toast.makeText(context, "switch state: ${isChecked}", Toast.LENGTH_LONG).show()
+        }
 
         return binding.root
     }

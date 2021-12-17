@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_settings_title"
             style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +25,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_addition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_addition"
+            android:checked="true"
+            android:layout_marginTop="@dimen/margin_top_big"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_settings_title"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_subtraction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_subtraction"
+            android:checked="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintTop_toBottomOf="@+id/switch_addition"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

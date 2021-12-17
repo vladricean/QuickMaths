@@ -43,15 +43,15 @@ class SignInActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel.editedText.observe(this,
         Observer { username ->
-            checkIfUsernameExists(username)
+            setupConfirmButtonState(username)
         })
         viewModel.onConfirmPressed().observe(this,
         Observer {
-            signInAnonymously(viewModel.editedText.value)
+            checkIfUsernameExists(viewModel.editedText.value)
         })
     }
 
-    private fun checkIfUsernameExists(username: String?) {
+    private fun setupConfirmButtonState(username: String?) {
         db.collection("users")
             .whereEqualTo("name", username)
             .get()
@@ -67,15 +67,28 @@ class SignInActivity : AppCompatActivity() {
             }
     }
 
+    private fun checkIfUsernameExists(username: String?) {
+        db.collection("users")
+            .whereEqualTo("name", username)
+            .get()
+            .addOnSuccessListener { documents ->
+                if(documents.isEmpty){
+                    signInAnonymously(username)
+                }else{
+                    btn_confirm.setEnabled(false)
+                }
+            }
+            .addOnFailureListener{ exception ->
+                Timber.w("Error getting documents: ${exception}")
+            }
+    }
+
     private fun signInAnonymously(username: String?) {
         mAuth.signInAnonymously()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    addAnonymousUserToFirestore(username)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    addFreshUser(username)
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
@@ -84,38 +97,6 @@ class SignInActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-    }
-
-    private fun addAnonymousUserToFirestore(username: String?) {
-        val currentUser = mAuth.currentUser
-        val docRef = db.collection("users").document(currentUser!!.uid)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Timber.w("Listen failed.", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                // Do nothing
-            } else {
-                checkIfUserExists(username)
-            }
-        }
-    }
-
-    private fun checkIfUserExists(username: String?) {
-        val currentUser = mAuth.currentUser
-        val docRef = db.collection("users").document(currentUser!!.uid)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Timber.w("Listen failed.", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                // do nothing
-            } else {
-               addFreshUser(username)
-            }
-        }
     }
 
     private fun addFreshUser(username: String?) {
@@ -132,5 +113,8 @@ class SignInActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Timber.w("Error adding document", e)
             }
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

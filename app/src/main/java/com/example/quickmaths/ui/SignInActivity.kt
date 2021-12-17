@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import com.example.quickmaths.MainActivity
 import com.example.quickmaths.R
 import com.example.quickmaths.databinding.ActivitySignInBinding
@@ -33,6 +34,7 @@ class SignInActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
+        ViewTreeLifecycleOwner.set(window.decorView, this)
 
         mAuth = FirebaseAuth.getInstance()
         db = Firebase.firestore
@@ -47,6 +49,7 @@ class SignInActivity : AppCompatActivity() {
         })
         viewModel.onConfirmPressed().observe(this,
         Observer {
+            btn_confirm.setEnabled(false)
             checkIfUsernameExists(viewModel.editedText.value)
         })
     }

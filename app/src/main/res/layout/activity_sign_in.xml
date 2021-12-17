@@ -37,7 +37,7 @@
             android:layout_height="@dimen/btn_number_height"
             android:layout_marginTop="@dimen/margin_top_big"
             android:enabled="false"
-            android:onClick="@{() -> viewModel.onConfirmTapped()}"
+            android:onClickDebounce="@{() -> viewModel.onConfirmTapped()}"
             android:text="@string/btn_confirm"
             app:layout_constraintEnd_toEndOf="@id/et_choose_name"
             app:layout_constraintStart_toStartOf="@id/et_choose_name"

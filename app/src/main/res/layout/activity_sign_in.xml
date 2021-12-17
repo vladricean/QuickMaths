@@ -4,30 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.SignInActivity">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.quickmaths.viewmodels.SignInViewModel" />
+        <variable
+            name="confirmConstant"
+            type="com.example.quickmaths.enums.ConfirmButtonState" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_google"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="284dp"
-            android:text="@string/btn_sign_in_with_google"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_choose_name"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/btn_number_height"
+            android:text="@={viewModel.editedText}"
+            android:hint="@string/et_nickname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/guideline" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_anonymous"
-            android:text="@string/btn_sign_in_anonymous"
-            android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_google"
-            app:layout_constraintStart_toStartOf="@+id/btn_google"
-            app:layout_constraintEnd_toEndOf="@+id/btn_google"/>
-
+            android:id="@+id/btn_confirm"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/btn_number_height"
+            android:layout_marginTop="@dimen/margin_top_big"
+            android:enabled="@{viewModel.confirmButtonState == confirmConstant.ENABLED ? true : false}"
+            android:onClickDebounce="@{() -> viewModel.onConfirmTapped()}"
+            android:text="@string/btn_confirm"
+            app:layout_constraintEnd_toEndOf="@id/et_choose_name"
+            app:layout_constraintStart_toStartOf="@id/et_choose_name"
+            app:layout_constraintTop_toBottomOf="@id/et_choose_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

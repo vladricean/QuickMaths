@@ -19,11 +19,6 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_signInActivity"
-            app:destination="@id/signInActivity"
-            app:popUpTo="@id/signInActivity"
-            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/playFragment"

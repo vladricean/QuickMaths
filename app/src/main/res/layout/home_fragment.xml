@@ -85,17 +85,6 @@
 
             </androidx.appcompat.widget.AppCompatButton>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="150dp"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginTop="80dp"
-                android:onClick="@{() -> viewModel.onLogoutTapped()}"
-                android:text="@string/btn_log_out"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatButton3"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/appCompatButton3"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatButton3" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TitleText"
                 android:layout_width="wrap_content"

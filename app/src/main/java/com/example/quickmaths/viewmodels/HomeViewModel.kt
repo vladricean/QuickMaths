@@ -40,14 +40,6 @@ class HomeViewModel : ViewModel() {
     fun onSettingsTapped() {
         onSettingsPressed.call()
     }
-
-    fun onLogoutPressed(): LiveData<Void> {
-        return onLogoutPressed
-    }
-
-    fun onLogoutTapped() {
-        onLogoutPressed.call()
-    }
     
     fun onQuitPressed(): LiveData<Void> {
         return onQuitPressed

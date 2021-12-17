@@ -95,14 +95,6 @@ class HomeFragment : Fragment() {
             val navController = findNavController()
             navController.navigate(R.id.action_homeFragment_to_settingsFragment)
         })
-        viewModel.onLogoutPressed().observe(viewLifecycleOwner,
-        Observer {
-            mGoogleSignInClient.signOut().addOnCompleteListener {
-                val navController = findNavController()
-                navController.navigate(R.id.action_homeFragment_to_signInActivity)
-                activity?.finish()
-            }
-        })
         viewModel.onQuitPressed().observe(viewLifecycleOwner,
         Observer {
             requireActivity().finishAffinity()

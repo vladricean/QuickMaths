@@ -2,11 +2,14 @@ package com.example.quickmaths.viewmodels
 
 import android.app.Application
 import android.os.CountDownTimer
+import android.provider.SyncStateContract
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.quickmaths.constants.Constants
+import com.example.quickmaths.sharedEncryptedPrefs
 import com.example.quickmaths.util.SingleLiveEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -60,6 +63,9 @@ class PlayViewModel() : ViewModel() {
     val userAnswer = MutableLiveData<Int>()
 
     init {
+        val addition = sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)
+        val subtraction = sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)
+        Timber.i("addition: ${addition} - subtraction: ${subtraction}")
         _score.value = 0
         userAnswer.value = 0
         firstNumber = Random.nextInt(1, 2)

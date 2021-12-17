@@ -41,5 +41,6 @@
     <string name="btn_log_out">Log out</string>
     <string name="et_nickname">Nickname..</string>
     <string name="btn_confirm">CONFIRM</string>
+    <string name="settings_title">Settings</string>
 
 </resources>

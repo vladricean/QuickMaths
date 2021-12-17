@@ -52,19 +52,33 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun setupConfirmButtonState(username: String?) {
-        db.collection("users")
-            .whereEqualTo("name", username)
-            .get()
-            .addOnSuccessListener { documents ->
-                if(documents.isEmpty){
-                    btn_confirm.setEnabled(true)
-                }else{
-                    btn_confirm.setEnabled(false)
+        if(usernameIsValid(username)) {
+            db.collection("users")
+                .whereEqualTo("name", username)
+                .get()
+                .addOnSuccessListener { documents ->
+                    if (documents.isEmpty) {
+                        btn_confirm.setEnabled(true)
+                    } else {
+                        btn_confirm.setEnabled(false)
+                    }
                 }
-            }
-            .addOnFailureListener{ exception ->
-                Timber.w("Error getting documents: ${exception}")
-            }
+                .addOnFailureListener { exception ->
+                    Timber.w("Error getting documents: ${exception}")
+                }
+        } else{
+            btn_confirm.setEnabled(false)
+        }
+    }
+
+    private fun usernameIsValid(username: String?): Boolean {
+        if(username?.length ?: 0 < 3) {
+            return false
+        }
+        if(username.isNullOrEmpty()){
+            return false
+        }
+        return true
     }
 
     private fun checkIfUsernameExists(username: String?) {

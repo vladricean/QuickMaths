@@ -144,15 +144,39 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun generateSubtractionExercise(difficulty: Int) {
-        firstNumber = Random.nextInt(5, 12)
-        secondNumber = Random.nextInt(1, firstNumber-2)
+        when(difficulty){
+            1 -> {
+                firstNumber = Random.nextInt(5, 12)
+                secondNumber = Random.nextInt(1, firstNumber-1)
+            }
+            2 -> {
+                firstNumber = Random.nextInt(5, 50)
+                secondNumber = Random.nextInt(1, firstNumber-1)
+            }
+            3 -> {
+                firstNumber = Random.nextInt(1, 120)
+                secondNumber = Random.nextInt(1, firstNumber-1)
+            }
+        }
         _question.value = "${firstNumber} - ${secondNumber}"
         answer = firstNumber - secondNumber
     }
 
     private fun generateMultiplicationExercise(difficulty: Int) {
-        firstNumber = Random.nextInt(2, 12)
-        secondNumber = Random.nextInt(2, 12)
+        when(difficulty){
+            1 -> {
+                firstNumber = Random.nextInt(2, 8)
+                secondNumber = Random.nextInt(1, 8)
+            }
+            2 -> {
+                firstNumber = Random.nextInt(2, 10)
+                secondNumber = Random.nextInt(1, 15)
+            }
+            3 -> {
+                firstNumber = Random.nextInt(5, 15)
+                secondNumber = Random.nextInt(5, 20)
+            }
+        }
         _question.value = "${firstNumber} * ${secondNumber}"
         answer = firstNumber * secondNumber
     }

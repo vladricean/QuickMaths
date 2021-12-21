@@ -10,6 +10,9 @@ import com.example.quickmaths.constants.Constants
 import com.example.quickmaths.constants.Constants.DONE
 import com.example.quickmaths.constants.Constants.ONE_SECOND
 import com.example.quickmaths.sharedEncryptedPrefs
+import kotlin.math.exp
+import kotlin.math.pow
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 class PlayViewModel() : ViewModel() {
@@ -115,19 +118,30 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun generateMultiplicationExercise() {
-        
+        firstNumber = Random.nextInt(2, 12)
+        secondNumber = Random.nextInt(2, 12)
+        _question.value = "${firstNumber} * ${secondNumber}"
+        answer = firstNumber * secondNumber
     }
 
     private fun generateDivisionExercise() {
-        TODO("Not yet implemented")
+        firstNumber = Random.nextInt(8, 9)
+        secondNumber = Random.nextInt(2, 3)
+        _question.value = "${firstNumber} / ${secondNumber}"
+        answer = firstNumber / secondNumber
     }
 
     private fun generateSquareRootExercise() {
-        TODO("Not yet implemented")
+        firstNumber = Random.nextInt(9, 10)
+        _question.value = "√${firstNumber}"
+        answer = sqrt(firstNumber.toDouble()).toInt()
     }
 
     private fun generateExponentialExercise() {
-        TODO("Not yet implemented")
+        firstNumber = Random.nextInt(2, 4)
+        secondNumber = Random.nextInt(2, 4)
+        _question.value = "${firstNumber} ^ ${secondNumber}"
+        answer = firstNumber.toDouble().pow(secondNumber).toInt()
     }
 
     private fun onLost() {

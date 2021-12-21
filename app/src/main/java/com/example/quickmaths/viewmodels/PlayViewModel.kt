@@ -49,7 +49,7 @@ class PlayViewModel() : ViewModel() {
     val getScoreAndNavigateToLost: LiveData<Int>
         get() = _getScoreAndNavigateToLost
 
-    private val rulesList = mutableListOf<Int>()
+    private val rulesList = mutableListOf<String>()
 
     val userAnswer = MutableLiveData<Int>()
 
@@ -61,12 +61,12 @@ class PlayViewModel() : ViewModel() {
 
     private fun setupRulesList() {
         rulesList.clear()
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)) rulesList.add(1)
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)) rulesList.add(2)
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_MULTIPLICATION, true)) rulesList.add(3)
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_DIVISION, true)) rulesList.add(4)
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SQUARE_ROOT, true)) rulesList.add(5)
-        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_EXPONENTIAL, true)) rulesList.add(6)
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)) rulesList.add("addition")
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)) rulesList.add("subtraction")
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_MULTIPLICATION, true)) rulesList.add("multiplication")
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_DIVISION, true)) rulesList.add("division")
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SQUARE_ROOT, true)) rulesList.add("squareRoot")
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_EXPONENTIAL, true)) rulesList.add("exponential")
     }
 
     private fun checkUserAnswer() {
@@ -96,16 +96,8 @@ class PlayViewModel() : ViewModel() {
             sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_ADDITION, true).apply()
             return "addition"
         }
-        val rulesMap = mapOf(
-            "1" to "addition",
-            "2" to "subtraction",
-            "3" to "multiplication",
-            "4" to "division",
-            "5" to "squareRoot",
-            "6" to "exponential",
-        )
         val randomIndex = Random.nextInt(0, rulesList.size)
-        return rulesMap[rulesList[randomIndex].toString()]
+        return rulesList[randomIndex]
     }
 
     private fun generateAdditionExercise() {

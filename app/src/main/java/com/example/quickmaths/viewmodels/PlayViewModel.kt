@@ -128,7 +128,7 @@ class PlayViewModel() : ViewModel() {
         return difficultyLevels[randomIndex]
     }
 
-    private fun getRandomRule(): String? {
+    private fun getRandomRule(): String {
         if(rulesList.isEmpty()) {
             sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_ADDITION, true).apply()
             return "addition"
@@ -222,8 +222,20 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun generateExponentialExercise(difficulty: Int) {
-        firstNumber = Random.nextInt(2, 4)
-        secondNumber = Random.nextInt(2, 4)
+        when(difficulty){
+            1 -> {
+                firstNumber = Random.nextInt(0, 5)
+                secondNumber = Random.nextInt(0, 4)
+            }
+            2 -> {
+                firstNumber = Random.nextInt(0, 7)
+                secondNumber = Random.nextInt(0, 4)
+            }
+            3 -> {
+                firstNumber = Random.nextInt(0, 10)
+                secondNumber = Random.nextInt(0, 4)
+            }
+        }
         _question.value = "${firstNumber} ^ ${secondNumber}"
         answer = firstNumber.toDouble().pow(secondNumber).toInt()
     }

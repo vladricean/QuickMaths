@@ -195,10 +195,48 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun generateDivisionExercise(difficulty: Int) {
-        firstNumber = Random.nextInt(8, 9)
-        secondNumber = Random.nextInt(2, 3)
+        val primeNumbers = listOf(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97)
+        when(difficulty){
+            1 -> {
+                firstNumber = Random.nextInt(10, 20)
+                while (primeNumbers.contains(firstNumber)){
+                    firstNumber = Random.nextInt(10, 20)
+                }
+                secondNumber = getRandomDivisor(firstNumber)
+            }
+            2 -> {
+                firstNumber = Random.nextInt(10, 40)
+                while (primeNumbers.contains(firstNumber)){
+                    firstNumber = Random.nextInt(10, 40)
+                }
+                secondNumber = getRandomDivisor(firstNumber)
+            }
+            3 -> {
+                firstNumber = Random.nextInt(10, 100)
+                while (primeNumbers.contains(firstNumber)){
+                    firstNumber = Random.nextInt(10, 100)
+                }
+                secondNumber = getRandomDivisor(firstNumber)
+            }
+        }
         _question.value = "${firstNumber} / ${secondNumber}"
         answer = firstNumber / secondNumber
+    }
+
+    private fun getRandomDivisor(firstNumber: Int): Int {
+        val allDivisors = getAllDivisors(firstNumber)
+        val randomIndex = Random.nextInt(0, allDivisors.size)
+        return allDivisors[randomIndex]
+    }
+
+    private fun getAllDivisors(firstNumber: Int): List<Int> {
+        val divList = mutableListOf<Int>()
+        for(i in 2 until firstNumber){
+            if(firstNumber.mod(i) == 0){
+                divList.add(i)
+            }
+        }
+        return divList
     }
 
     private fun generateSquareRootExercise(difficulty: Int) {

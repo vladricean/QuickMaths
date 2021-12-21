@@ -10,7 +10,6 @@ import com.example.quickmaths.constants.Constants
 import com.example.quickmaths.constants.Constants.DONE
 import com.example.quickmaths.constants.Constants.ONE_SECOND
 import com.example.quickmaths.sharedEncryptedPrefs
-import kotlin.math.exp
 import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.random.Random
@@ -54,6 +53,8 @@ class PlayViewModel() : ViewModel() {
 
     private val rulesList = mutableListOf<String>()
 
+    private val difficultyLevels = mutableListOf<Int>()
+
     val userAnswer = MutableLiveData<Int>()
 
     init {
@@ -63,6 +64,7 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun setupRulesList() {
+        difficultyLevels.clear()
         rulesList.clear()
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)) rulesList.add("addition")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)) rulesList.add("subtraction")
@@ -70,6 +72,13 @@ class PlayViewModel() : ViewModel() {
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_DIVISION, true)) rulesList.add("division")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SQUARE_ROOT, true)) rulesList.add("squareRoot")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_EXPONENTIAL, true)) rulesList.add("exponential")
+
+        /**
+         * 1 - easy
+         * 2 - moderate
+         * 3 - hard
+         */
+        difficultyLevels.addAll(listOf(1, 1, 1, 1, 1, 2))
     }
 
     private fun checkUserAnswer() {
@@ -80,18 +89,30 @@ class PlayViewModel() : ViewModel() {
 
     private fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
+        if(score.value?.rem(15) == 0){
+            difficultyLevels.add(2)
+        }
+        if(score.value?.rem(30) == 0){
+            difficultyLevels.add(3)
+        }
+
         userAnswer.value = 0
         timer.cancel()
         timer.start()
 
         when(getRandomRule()) {
-            "addition" -> generateAdditionExercise()
-            "subtraction" -> generateSubtractionExercise()
-            "multiplication" -> generateMultiplicationExercise()
-            "division" -> generateDivisionExercise()
-            "squareRoot" -> generateSquareRootExercise()
-            "exponential" -> generateExponentialExercise()
+            "addition" -> generateAdditionExercise(getRandomDifficulty())
+            "subtraction" -> generateSubtractionExercise(getRandomDifficulty())
+            "multiplication" -> generateMultiplicationExercise(getRandomDifficulty())
+            "division" -> generateDivisionExercise(getRandomDifficulty())
+            "squareRoot" -> generateSquareRootExercise(getRandomDifficulty())
+            "exponential" -> generateExponentialExercise(getRandomDifficulty())
         }
+    }
+
+    private fun getRandomDifficulty(): Int {
+        val randomIndex = Random.nextInt(0, difficultyLevels.size)
+        return difficultyLevels[randomIndex]
     }
 
     private fun getRandomRule(): String? {
@@ -103,41 +124,53 @@ class PlayViewModel() : ViewModel() {
         return rulesList[randomIndex]
     }
 
-    private fun generateAdditionExercise() {
-        firstNumber = Random.nextInt(1, 9)
-        secondNumber = Random.nextInt(1, 9)
+    private fun generateAdditionExercise(difficulty: Int) {
+        when(difficulty){
+            1 -> {
+                firstNumber = Random.nextInt(1, 15)
+                secondNumber = Random.nextInt(1, 15)
+            }
+            2 -> {
+                firstNumber = Random.nextInt(1, 50)
+                secondNumber = Random.nextInt(1, 50)
+            }
+            3 -> {
+                firstNumber = Random.nextInt(1, 120)
+                secondNumber = Random.nextInt(1, 120)
+            }
+        }
         _question.value = "${firstNumber} + ${secondNumber}"
         answer = firstNumber + secondNumber
     }
 
-    private fun generateSubtractionExercise() {
+    private fun generateSubtractionExercise(difficulty: Int) {
         firstNumber = Random.nextInt(5, 12)
         secondNumber = Random.nextInt(1, firstNumber-2)
         _question.value = "${firstNumber} - ${secondNumber}"
         answer = firstNumber - secondNumber
     }
 
-    private fun generateMultiplicationExercise() {
+    private fun generateMultiplicationExercise(difficulty: Int) {
         firstNumber = Random.nextInt(2, 12)
         secondNumber = Random.nextInt(2, 12)
         _question.value = "${firstNumber} * ${secondNumber}"
         answer = firstNumber * secondNumber
     }
 
-    private fun generateDivisionExercise() {
+    private fun generateDivisionExercise(difficulty: Int) {
         firstNumber = Random.nextInt(8, 9)
         secondNumber = Random.nextInt(2, 3)
         _question.value = "${firstNumber} / ${secondNumber}"
         answer = firstNumber / secondNumber
     }
 
-    private fun generateSquareRootExercise() {
+    private fun generateSquareRootExercise(difficulty: Int) {
         firstNumber = Random.nextInt(9, 10)
         _question.value = "√${firstNumber}"
         answer = sqrt(firstNumber.toDouble()).toInt()
     }
 
-    private fun generateExponentialExercise() {
+    private fun generateExponentialExercise(difficulty: Int) {
         firstNumber = Random.nextInt(2, 4)
         secondNumber = Random.nextInt(2, 4)
         _question.value = "${firstNumber} ^ ${secondNumber}"

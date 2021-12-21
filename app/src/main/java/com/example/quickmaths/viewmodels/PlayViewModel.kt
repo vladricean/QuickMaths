@@ -59,12 +59,22 @@ class PlayViewModel() : ViewModel() {
 
     init {
         setupRulesList()
+        setupDifficulty()
         _score.value = -1
         onCorrect()
     }
 
-    private fun setupRulesList() {
+    /**
+     * 1 - easy
+     * 2 - moderate
+     * 3 - hard
+     */
+    private fun setupDifficulty() {
         difficultyLevels.clear()
+        difficultyLevels.addAll(listOf(1, 1, 1, 1, 1))
+    }
+
+    private fun setupRulesList() {
         rulesList.clear()
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)) rulesList.add("addition")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)) rulesList.add("subtraction")
@@ -72,13 +82,6 @@ class PlayViewModel() : ViewModel() {
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_DIVISION, true)) rulesList.add("division")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SQUARE_ROOT, true)) rulesList.add("squareRoot")
         if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_EXPONENTIAL, true)) rulesList.add("exponential")
-
-        /**
-         * 1 - easy
-         * 2 - moderate
-         * 3 - hard
-         */
-        difficultyLevels.addAll(listOf(1, 1, 1, 1, 1, 2))
     }
 
     private fun checkUserAnswer() {
@@ -88,18 +91,28 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun onCorrect() {
-        _score.value = (_score.value)?.plus(1)
-        if(score.value?.rem(15) == 0){
+        incrementScoreByOne()
+        adjustDifficulty()
+        initiateExercise()
+    }
+
+    private fun adjustDifficulty() {
+        if(score.value?.mod(15) == 0 && score.value != 0){
             difficultyLevels.add(2)
         }
-        if(score.value?.rem(30) == 0){
+        if(score.value?.mod(30) == 0  && score.value != 0){
             difficultyLevels.add(3)
         }
+    }
 
+    private fun incrementScoreByOne() {
+        _score.value = (_score.value)?.plus(1)
+    }
+
+    private fun initiateExercise() {
         userAnswer.value = 0
         timer.cancel()
         timer.start()
-
         when(getRandomRule()) {
             "addition" -> generateAdditionExercise(getRandomDifficulty())
             "subtraction" -> generateSubtractionExercise(getRandomDifficulty())
@@ -189,7 +202,21 @@ class PlayViewModel() : ViewModel() {
     }
 
     private fun generateSquareRootExercise(difficulty: Int) {
-        firstNumber = Random.nextInt(9, 10)
+        val squareRootList = listOf(4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 729, 784, 841, 900, 961)
+        when(difficulty){
+            1 -> {
+                val randomIndex = Random.nextInt(0, 10)
+                firstNumber =squareRootList[randomIndex]
+            }
+            2 -> {
+                val randomIndex = Random.nextInt(5, 16)
+                firstNumber =squareRootList[randomIndex]
+            }
+            3 -> {
+                val randomIndex = Random.nextInt(10, squareRootList.size)
+                firstNumber =squareRootList[randomIndex]
+            }
+        }
         _question.value = "√${firstNumber}"
         answer = sqrt(firstNumber.toDouble()).toInt()
     }

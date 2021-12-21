@@ -1,35 +1,24 @@
 package com.example.quickmaths.viewmodels
 
-import android.app.Application
 import android.os.CountDownTimer
-import android.provider.SyncStateContract
 import android.text.format.DateUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.quickmaths.constants.Constants
+import com.example.quickmaths.constants.Constants.DONE
+import com.example.quickmaths.constants.Constants.ONE_SECOND
 import com.example.quickmaths.sharedEncryptedPrefs
-import com.example.quickmaths.util.SingleLiveEvent
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import timber.log.Timber
 import kotlin.random.Random
 
 class PlayViewModel() : ViewModel() {
-
-    companion object {
-        private const val DONE = 0L
-        private const val ONE_SECOND = 1000L
-        private const val COUNTDOWN_TIME = 2500L
-    }
 
     private var firstNumber = 0
     private var secondNumber = 0
     private var answer = 0
 
-    private val timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
+    private val timer = object : CountDownTimer(Constants.COUNTDOWN_TIME, ONE_SECOND) {
         override fun onTick(millisUntilFinished: Long) {
             _currentTime.value = millisUntilFinished / ONE_SECOND
         }
@@ -60,19 +49,20 @@ class PlayViewModel() : ViewModel() {
     val getScoreAndNavigateToLost: LiveData<Int>
         get() = _getScoreAndNavigateToLost
 
+    private val rulesList = mutableListOf<Int>()
+
     val userAnswer = MutableLiveData<Int>()
 
     init {
-        val addition = sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)
-        val subtraction = sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)
-        Timber.i("addition: ${addition} - subtraction: ${subtraction}")
-        _score.value = 0
-        userAnswer.value = 0
-        firstNumber = Random.nextInt(1, 2)
-        secondNumber = Random.nextInt(1, 2)
-        _question.value = "${firstNumber} + ${secondNumber}"
-        answer = firstNumber + secondNumber
-        timer.start()
+        setupRulesList()
+        _score.value = -1
+        onCorrect()
+    }
+
+    private fun setupRulesList() {
+        rulesList.clear()
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true)) rulesList.add(1)
+        if(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true)) rulesList.add(2)
     }
 
     private fun checkUserAnswer() {
@@ -83,13 +73,41 @@ class PlayViewModel() : ViewModel() {
 
     private fun onCorrect() {
         _score.value = (_score.value)?.plus(1)
-        firstNumber = Random.nextInt(1, 2)
-        secondNumber = Random.nextInt(1, 2)
-        _question.value = "${firstNumber} + ${secondNumber}"
-        answer = firstNumber + secondNumber
         userAnswer.value = 0
         timer.cancel()
         timer.start()
+
+        when(getRandomRule()) {
+            "addition" -> generateAdditionExercise()
+            "subtraction" -> generateSubtractionExercise()
+        }
+    }
+
+    private fun getRandomRule(): String? {
+        if(rulesList.isEmpty()) {
+            sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_ADDITION, true).apply()
+            return "addition"
+        }
+        val rulesMap = mapOf(
+            "1" to "addition",
+            "2" to "subtraction",
+        )
+        val randomIndex = Random.nextInt(0, rulesList.size)
+        return rulesMap[rulesList[randomIndex].toString()]
+    }
+
+    private fun generateAdditionExercise() {
+        firstNumber = Random.nextInt(1, 9)
+        secondNumber = Random.nextInt(1, 9)
+        _question.value = "${firstNumber} + ${secondNumber}"
+        answer = firstNumber + secondNumber
+    }
+
+    private fun generateSubtractionExercise() {
+        firstNumber = Random.nextInt(5, 12)
+        secondNumber = Random.nextInt(1, firstNumber-2)
+        _question.value = "${firstNumber} - ${secondNumber}"
+        answer = firstNumber - secondNumber
     }
 
     private fun onLost() {

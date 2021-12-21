@@ -53,6 +53,18 @@ class SettingsFragment: Fragment() {
         binding.switchSubtraction.setOnCheckedChangeListener{ _, isChecked ->
             sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_SUBTRACTION, isChecked).apply()
         }
+        binding.switchMultiplication.setOnCheckedChangeListener{ _, isChecked ->
+            sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_MULTIPLICATION, isChecked).apply()
+        }
+        binding.switchDivision.setOnCheckedChangeListener{ _, isChecked ->
+            sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_DIVISION, isChecked).apply()
+        }
+        binding.switchSquareRoot.setOnCheckedChangeListener{ _, isChecked ->
+            sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_SQUARE_ROOT, isChecked).apply()
+        }
+        binding.switchExponential.setOnCheckedChangeListener{ _, isChecked ->
+            sharedEncryptedPrefs.instance.edit().putBoolean(Constants.SWITCH_EXPONENTIAL, isChecked).apply()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -70,5 +82,9 @@ class SettingsFragment: Fragment() {
         super.onResume()
         binding.switchAddition.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_ADDITION, true))
         binding.switchSubtraction.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SUBTRACTION, true))
+        binding.switchMultiplication.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_MULTIPLICATION, true))
+        binding.switchDivision.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_DIVISION, true))
+        binding.switchSquareRoot.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_SQUARE_ROOT, true))
+        binding.switchExponential.setChecked(sharedEncryptedPrefs.instance.getBoolean(Constants.SWITCH_EXPONENTIAL, true))
     }
 }

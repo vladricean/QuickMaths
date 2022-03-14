@@ -16,6 +16,8 @@ import com.example.quickmaths.viewmodels.HomeViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -31,6 +33,7 @@ class HomeFragment : Fragment() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var db: FirebaseFirestore
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +47,8 @@ class HomeFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
         db = Firebase.firestore
+
+        firebaseAnalytics = Firebase.analytics
 
         setupGSO()
         setupObservation()
@@ -80,6 +85,12 @@ class HomeFragment : Fragment() {
     private fun setupObservation(){
         viewModel.onPlayPressed().observe(viewLifecycleOwner,
             Observer {
+                val bundle = Bundle()
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "10")
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
+                firebaseAnalytics.logEvent("MyFirstEvent", bundle)
+
                 val navController = findNavController()
                 navController.navigate(R.id.action_homeFragment_to_playFragment)
             })

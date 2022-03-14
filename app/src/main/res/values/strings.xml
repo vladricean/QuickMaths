@@ -41,5 +41,11 @@
     <string name="btn_log_out">Log out</string>
     <string name="et_nickname">Nickname..</string>
     <string name="btn_confirm">CONFIRM</string>
+    <string name="switch_addition">Addition +   </string>
+    <string name="switch_subtraction">Subtraction - </string>
+    <string name="switch_multiplication">Multiplication *</string>
+    <string name="switch_division">Division /</string>
+    <string name="swith_square_root">Square root</string>
+    <string name="switch_exponential">Exponential ^</string>
 
 </resources>
